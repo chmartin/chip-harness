@@ -13,7 +13,7 @@ Built for The Harness Engineering & Model Wrangling Hackathon (MongoDB NYC, Sep 
 - **h2** pipelined correctly and raised fmax from **909.5 MHz** (baseline) to about **1330 MHz (+46%)**, measured after full place-and-route with 0 DRC violations.
 - **The ceiling.** Later versions hit a measurement ceiling: once a design clears the clock target, OpenROAD stops optimizing, so the target was raised to keep the flow pushing.
 
-The live dashboard shows every trial, every harness version, its rationale and its config diff: **<dashboard URL>**
+The live dashboard shows every trial, every harness version, its rationale and its config diff: **https://chip-harness.vercel.app/**
 
 ## How it works
 ```
