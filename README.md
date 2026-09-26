@@ -7,11 +7,27 @@ A harness that designs hardware and rewrites itself.
 
 Built for The Harness Engineering & Model Wrangling Hackathon (MongoDB NYC, Sep 26 2026), **Problem Statement 1: Recursive Harnessing**. Inspired by [Meta harness makes 10 times better Kimi K3 chip](https://www.luoluo.ai/blog/kimi-k3).
 
-## What happened on the day
+## Current state (Sep 26, ~1:30 PM)
+- **Run 1 (1 GHz target): done.** h1 → h2 gave **+46%** fmax (details below). Its data is archived in Atlas as the `run1_*` collections, and its log is in [`logs/run1_h1_to_h5.txt`](logs/run1_h1_to_h5.txt).
+- **Run 2 (1.5 GHz target): in progress.** This is a clean re-run from the seed harness h1, and the demo video records it.
+  - **Why:** at 1 GHz every good design met timing, and OpenROAD stops optimizing once a design meets the target.
+  - **Tracing:** run 2 is traced end to end:
+    - LangGraph nodes and the Strands agents' model and tool calls in LangSmith
+    - per-call cost in OpenRouter
+    - all state in Atlas
+    - the live chart on the dashboard
+  - **Results:** added here when the run finishes; its log will be `logs/run2_1500.log`.
+- **Not built (cut for time):**
+  - vector search over lessons (lessons are retrieved with a plain query instead)
+  - Atlas as a job queue for extra worker machines
+  - EC2 workers
+
+## What happened in run 1 (1 GHz target)
 - **h1** is the deliberately weak seed harness: summary slack only, no tools, no lessons. All 4 of its attempts at pipelining broke the design (e.g. registering the product without delaying the enable), and the testbench rejected every one. That triggered the plateau rule `stuck_rejecting`.
 - **The evolution agent** read those failures from Atlas and produced **h2**. h2 gives the design agent a `tier1_check` tool, which runs the testbench and a fast synthesis on its own draft. h2 also shows the agent the critical-path report and weights pipelining fixes higher.
 - **h2** pipelined correctly and raised fmax from **909.5 MHz** (baseline) to about **1330 MHz (+46%)**, measured after full place-and-route with 0 DRC violations.
-- **The ceiling.** Later versions hit a measurement ceiling: once a design clears the clock target, OpenROAD stops optimizing, so the target was raised to keep the flow pushing.
+- **The ceiling.** h3 and h4 found no further gain and were **retired**, as the keep/retire rule intends. The cause was the measurement: once a design clears the clock target, OpenROAD stops optimizing, so every good design reads about the same slack. h5 was created, and then the run stopped when the OpenRouter credits ran out. Run 2 raises the target to 1.5 GHz.
+- **Cost:** run 1 cost $8.23 in OpenRouter credits (186 model calls, 1.95M tokens).
 
 The live dashboard shows every trial, every harness version, its rationale and its config diff: **https://chip-harness.vercel.app/**
 
@@ -49,12 +65,17 @@ LangGraph StateGraph (checkpointed in Atlas with MongoDBSaver)
 | `lessons` | What helped or hurt, fed back into later prompts when the harness enables it |
 | `harness_settings` | The fixed plateau policy |
 | LangGraph checkpoints | Loop state after every node; `--resume` continues a killed run from the last node |
+| `run1_*` | Run 1 (1 GHz), archived by renaming the collections before the clean run 2 |
 
 The evolution agent queries `trials` through a tool. The dashboard reads Atlas directly with a read-only user.
 
 ## Stack
 - **Agents:** [Strands Agents](https://strandsagents.com) (AWS) for the design and evolution agents, with models via [OpenRouter](https://openrouter.ai)
 - **Orchestration:** [LangGraph](https://langchain-ai.github.io/langgraph/), with checkpoints in Atlas (`langgraph-checkpoint-mongodb`)
+- **Tracing:** [LangSmith](https://smith.langchain.com), turned on with `LANGSMITH_TRACING=true`:
+  - LangGraph nodes are traced natively.
+  - Strands agent spans are exported over OpenTelemetry to LangSmith's OTLP endpoint. This needs `opentelemetry-exporter-otlp-proto-http`.
+  - The OpenRouter activity log shows per-call cost.
 - **EDA:** iverilog, Yosys + ABC (OSS CAD Suite), OpenROAD-flow-scripts (`openroad/orfs` Docker image), Nangate45
 - **Data:** MongoDB Atlas
 - **Dashboard:** Next.js on Vercel
@@ -62,7 +83,7 @@ The evolution agent queries `trials` through a tool. The dashboard reads Atlas d
 ## Run it
 Prerequisites: Python ≥ 3.10, Docker, [OSS CAD Suite](https://github.com/YosysHQ/oss-cad-suite-build) at `eda/eda-test/oss-cad-suite` (or set `OSS_CAD_SUITE`), an Atlas cluster and an OpenRouter key.
 ```bash
-cp .env.example .env                                   # MONGODB_URI, MONGODB_DB, OPENROUTER_API_KEY
+cp .env.example .env                                   # MONGODB_URI, MONGODB_DB, OPENROUTER_API_KEY (+ optional LANGSMITH_*)
 python3 -m venv harness/.venv && source harness/.venv/bin/activate
 pip install -e "harness[dev]"
 python harness/tests/test_parser.py                    # parser tests (no deps)
@@ -71,12 +92,13 @@ mkdir -p harness/eda_assets && docker run --rm --platform linux/amd64 openroad/o
   cat /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib \
   > harness/eda_assets/NangateOpenCellLibrary_typical.lib
 
+export CLOCK_MHZ=1500                                  # clock target (default 1000); not checkpointed, so set it on resume too
 python -m chipharness.seed                             # plateau policy + seed harness h1
 python -m chipharness.smoke                            # baseline trial t-h1-00 (~5 min)
-python -m chipharness.graph --iterations 20 --thread main           # both loops
-python -m chipharness.graph --thread main --resume                  # continue after a kill
-CLOCK_MHZ=1500 python -m chipharness.graph --iterations 20 --thread main2   # raise the target
+python -m chipharness.graph --iterations 10 --thread run2           # both loops
+python -m chipharness.graph --thread run2 --resume                  # continue after a kill (Ctrl-C)
 ```
+Run from the repo root. `python -m chipharness.seed --reset` wipes trials, versions and lessons, so rename them first if you want to keep a run.
 Dashboard: see `dashboard/README.md`.
 
 On Apple Silicon, ORFS runs under Rosetta with `LEC_CHECK=0`: about 5 min per full flow at 1 GHz, 4 in parallel.

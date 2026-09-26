@@ -11,6 +11,7 @@ dependencies = [
   "langsmith>=0.1",
   "strands-agents>=1.0",
   "strands-agents[openai]>=1.0",
+  "opentelemetry-exporter-otlp-proto-http",  # Strands spans -> LangSmith (optional at runtime)
 ]
 
 [project.optional-dependencies]

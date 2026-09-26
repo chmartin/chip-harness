@@ -16,6 +16,29 @@ from strands.models.openai import OpenAIModel
 
 from . import config, db, eda, reports
 
+
+def _setup_tracing() -> None:
+    """Send Strands agent spans (model calls, tool calls) to LangSmith over OTLP.
+
+    On only when LANGSMITH_TRACING=true and a key is set. Never fatal: if the OTLP
+    exporter isn't installed or setup fails, the run continues untraced.
+    Needs: pip install opentelemetry-exporter-otlp-proto-http
+    """
+    key = os.environ.get("LANGSMITH_API_KEY")
+    if os.environ.get("LANGSMITH_TRACING", "").lower() != "true" or not key:
+        return
+    try:
+        from strands.telemetry import StrandsTelemetry
+        project = os.environ.get("LANGSMITH_PROJECT", "chipharness")
+        os.environ.setdefault("OTEL_EXPORTER_OTLP_ENDPOINT", "https://api.smith.langchain.com/otel")
+        os.environ.setdefault("OTEL_EXPORTER_OTLP_HEADERS", f"x-api-key={key},Langsmith-Project={project}")
+        StrandsTelemetry().setup_otlp_exporter()
+    except Exception as e:  # noqa: BLE001 - tracing must never stop a run
+        print(f"[tracing] Strands spans not exported to LangSmith: {e}")
+
+
+_setup_tracing()
+
 OPENROUTER_URL = "https://openrouter.ai/api/v1"
 
 # Menu the evolution agent may choose from (validated in evolve()).
@@ -115,7 +138,10 @@ def propose(version: dict, parent: dict, fix_family: str, slot: int) -> dict:
                           "Guardrails: " + "; ".join(cfg.get("guardrails", [])), DESIGN_FORMAT])
     prompt = "\n\n".join(ctx + [f"Fix family to try this time: {fix_family} (variant #{slot}).",
                                 "Parent RTL:\n```verilog\n" + parent["design"]["rtl"] + "\n```"])
-    agent = Agent(model=_model(model_id), system_prompt=system, tools=tools, callback_handler=None)
+    agent = Agent(model=_model(model_id), system_prompt=system, tools=tools, callback_handler=None,
+                  name=f"design-{version['_id']}-{slot}",
+                  trace_attributes={"harness_version": version["_id"], "parent_trial_id": parent["_id"],
+                                    "fix_family": fix_family, "slot": slot})
     try:
         result = agent(prompt)
     except Exception as e:  # network / provider errors -> rejected trial, loop continues
@@ -170,7 +196,8 @@ def evolve(version: dict, reason: str) -> dict:
         return "\n".join(rows) or "(none)"
 
     agent = Agent(model=_model(model_id, temperature=0.4), system_prompt=EVOLVE_SYSTEM,
-                  tools=[trial_history], callback_handler=None)
+                  tools=[trial_history], callback_handler=None, name=f"evolve-{version['_id']}",
+                  trace_attributes={"harness_version": version["_id"], "plateau_reason": reason})
     prompt = (f"Plateau reason: {reason}. Harness version {version['_id']} stats: {json.dumps(version.get('stats'))}\n"
               f"Current config:\n```json\n{json.dumps(cfg, indent=2)}\n```")
     result = agent(prompt)
