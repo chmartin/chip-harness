@@ -3,7 +3,10 @@ import { MongoClient } from "mongodb";
 export const dynamic = "force-dynamic";
 let clientPromise;
 function client() {
-  if (!clientPromise) clientPromise = new MongoClient(process.env.MONGODB_URI).connect();
+  if (!clientPromise) {
+    clientPromise = new MongoClient(process.env.MONGODB_URI, { serverSelectionTimeoutMS: 8000 }).connect();
+    clientPromise.catch(() => { clientPromise = null; }); // don't cache a failed connection
+  }
   return clientPromise;
 }
 
