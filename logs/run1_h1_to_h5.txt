@@ -1,0 +1,268 @@
+$ caffeinate -dims python -m chipharness.graph --iterations 25 --thread main
+[15:41:47] h1 iter 1: parent t-h1-00 fmax=909.5
+[15:41:48]   t-h1-01-0: None - cached
+[15:41:48]   t-h1-01-1: None - cached
+[15:41:48]   t-h1-01-2: None - cached
+[15:41:48]   t-h1-01-3: None - cached
+[15:41:48]   t-h1-01-0: valid=False fmax=None reject=testbench_fail
+[15:41:48]   t-h1-01-1: valid=False fmax=None reject=testbench_fail
+[15:41:48]   t-h1-01-2: valid=False fmax=None reject=testbench_fail
+[15:41:49]   t-h1-01-3: valid=False fmax=None reject=testbench_fail
+[15:41:49] h1: 4 trials, best=909.5 plateau=stuck_rejecting
+[15:41:49] evolving from h1 (reason stuck_rejecting) ...
+[15:42:06] created h2: All 4 trials failed testbench because the agent proposed functional changes without ability to test them first. The agent needs: (1) tier1_check tool to validate drafts before submission, (2) critical_path report to see actual bottlenecks not just slack numbers, (3) stronger emphasis on safe micro-optimizations and explicit pipelining families with higher weight, and (4) a tier1 regression filter to skip obviously broken candidates early.
+[15:42:06] h2 iter 1: parent t-h1-00 fmax=909.5
+OpenAI threw rate limit error
+[15:43:53]   t-h2-01-0: input_register - Register all inputs (a_flat, b_flat, en, clear) to break the critical path from input ports through multiplication and accumulatio
+[15:43:53]   t-h2-01-1: pipeline_register - Register all inputs (a_flat, b_flat, en, clear) to break the critical path from input ports through multiplication and accumula
+[15:43:53]   t-h2-01-2: pipeline_register - Add pipeline register between multiplier and accumulator to split the critical multiply-accumulate path into two shorter stages
+[15:43:53]   t-h2-01-3: pipeline_register - Register multiplication products before accumulation to break the critical multiply-accumulate combinational path
+[15:50:34]   t-h2-01-0: valid=True fmax=803.8 reject=None
+[15:50:34]   t-h2-01-1: valid=True fmax=803.8 reject=None
+[15:50:34]   t-h2-01-2: valid=True fmax=1319.6 reject=None
+[15:50:34]   t-h2-01-3: valid=True fmax=1319.6 reject=None
+[15:50:35] h2: 4 trials, best=1319.6 plateau=None
+[15:50:35] h2 iter 2: parent t-h2-01-2 fmax=1319.6
+[15:53:10]   t-h2-02-0: accumulator_split - Register the selector input to reduce output mux timing pressure and improve fmax
+[15:53:10]   t-h2-02-1: pipeline_register - Add pipeline register for sign-extended product to break critical path between product register and 24-bit accumulator addition
+[15:53:10]   t-h2-02-2: pipeline_register - Register sign-extended product before accumulator to break the critical adder path into shorter stages
+[15:53:10]   t-h2-02-3: pipeline_register - Add pipeline register for sign-extended product before accumulator adder to break the long combinational path from p_p through 
+[15:59:07]   t-h2-02-0: valid=True fmax=1318.0 reject=None
+[15:59:07]   t-h2-02-1: valid=True fmax=1332.2 reject=None
+[15:59:07]   t-h2-02-2: valid=True fmax=1332.2 reject=None
+[15:59:07]   t-h2-02-3: valid=True fmax=1332.2 reject=None
+[15:59:08] h2: 8 trials, best=1332.2 plateau=no_gain
+[15:59:08] h2 verdict: KEPT (+46.5% vs parent)
+[15:59:08] evolving from h2 (reason no_gain) ...
+[15:59:29] created h3: Trial history shows the agent achieved 1332 MHz through input and multiply-accumulate pipelining, then plateaued with 5 redundant attempts at the same sign-extension pipeline fix. The harness over-samples pipeline_register (35%) while ignoring output_mux_pipeline and logic_restructure entirely. I'm rebalancing weights to explore output path optimization and logic restructuring, adding those families, increasing lessons to 5 for better pattern recognition, and updating the prompt to guide the agent toward accumulator/output bottlenecks after initial pipelining succeeds.
+[15:59:29] h3 iter 1: parent t-h2-02-3 fmax=1332.2
+[16:02:29]   t-h3-01-0: accumulator_split - Split the 24-bit accumulator adder into two pipeline stages to reduce critical path through adder logic
+[16:02:29]   t-h3-01-1: logic_restructure - Attempted to reduce accumulator adder critical path by restructuring sign-extension pipeline, but parent design is already well
+[16:02:29]   t-h3-01-2: logic_restructure - Split 24-bit accumulator addition into three 8-bit chunks with ripple-carry between chunks to reduce critical path through wide
+[16:02:29]   t-h3-01-3: micro_optimization - Return parent design as micro-optimizations did not improve timing
+[16:07:53]   t-h3-01-0: valid=False fmax=None reject=testbench_fail
+[16:07:53]   t-h3-01-1: valid=True fmax=1332.2 reject=None
+[16:07:53]   t-h3-01-2: valid=True fmax=984.6 reject=None
+[16:07:54]   t-h3-01-3: valid=True fmax=1332.2 reject=None
+[16:07:54] h3: 4 trials, best=1332.2 plateau=no_gain
+[16:07:54] h3 verdict: RETIRED (+0.0% vs parent)
+[16:07:54] evolving from h2 (reason no_gain) ...
+[16:08:13] created h4: Trial history shows the agent repeatedly attempting nearly identical pipeline_register fixes (sign-extension staging) that yield the same 1332 MHz result. The design has exhausted simple pipelining opportunities. I'm rebalancing fix_families to emphasize unexplored strategies (output_mux_pipeline, logic_restructure), reducing over-sampled pipeline_register, increasing lessons to 5 for better memory of past attempts, and updating the prompt to guide the agent toward datapath restructuring and output path optimization.
+[16:08:13] h4 iter 1: parent t-h2-02-3 fmax=1332.2
+[16:11:20]   t-h4-01-0: logic_restructure - Restructured 24-bit accumulator addition into hierarchical 4-bit ripple-carry chunks to reduce critical path delay
+[16:11:20]   t-h4-01-1: logic_restructure - Split 24-bit accumulator addition into 6 chunks of 4 bits each using conditional-sum adder structure to reduce carry propagatio
+[16:11:20]   t-h4-01-2: output_mux_pipeline - Return parent design as best solution - already exceeds 1000 MHz target at 1332 MHz
+[16:11:20]   t-h4-01-3: no_change - Keep parent design unchanged as it already exceeds 1000 MHz target and all optimization attempts degraded performance
+[16:17:15]   t-h4-01-0: valid=True fmax=739.8 reject=None
+[16:17:15]   t-h4-01-1: valid=True fmax=1223.9 reject=None
+[16:17:15]   t-h4-01-2: valid=True fmax=1332.2 reject=None
+[16:17:15]   t-h4-01-3: valid=True fmax=1332.2 reject=None
+[16:17:16] h4: 4 trials, best=1332.2 plateau=no_gain
+[16:17:16] h4 verdict: RETIRED (+0.0% vs parent)
+[16:17:16] evolving from h2 (reason no_gain) ...
+[16:17:36] created h5: Trial history shows the agent plateaued at ~1332 MHz by exhausting basic pipelining opportunities. Six of eight trials attempted nearly identical pipeline register insertions with diminishing returns. The fix_families were over-weighted toward pipeline_register (35%) and input_register (25%), causing repetitive attempts. I've rebalanced to emphasize logic_restructure, output_mux_pipeline, and retiming while updating the diagnosis_prompt to guide the agent toward datapath optimization, output path improvements, and register placement refinement rather than just adding more pipeline stages.
+[16:17:36] h5 iter 1: parent t-h2-02-3 fmax=1332.2
+exception=<APIStatusError> | event loop cycle failed
+exception=<APIStatusError> | event loop cycle failed
+exception=<APIStatusError> | event loop cycle failed
+exception=<APIStatusError> | event loop cycle failed
+[16:20:18]   t-h5-01-0: pipeline_register - EventLoopException: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make s
+[16:20:18]   t-h5-01-1: accumulator_split - EventLoopException: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make s
+[16:20:18]   t-h5-01-2: logic_restructure - EventLoopException: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make s
+[16:20:18]   t-h5-01-3: micro_optimization - EventLoopException: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make 
+[16:20:18]   t-h5-01-0: valid=False fmax=None reject=error
+[16:20:18]   t-h5-01-1: valid=False fmax=None reject=error
+[16:20:18]   t-h5-01-2: valid=False fmax=None reject=error
+[16:20:18]   t-h5-01-3: valid=False fmax=None reject=error
+[16:20:19] h5: 0 trials, best=None plateau=None
+[16:20:19] h5 iter 2: parent t-h2-02-3 fmax=1332.2
+[16:20:20]   t-h5-02-0: pipeline_register - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:20]   t-h5-02-1: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:20]   t-h5-02-2: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:20]   t-h5-02-3: micro_optimization - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure
+[16:20:20]   t-h5-02-0: valid=False fmax=None reject=error
+[16:20:20]   t-h5-02-1: valid=False fmax=None reject=error
+[16:20:20]   t-h5-02-2: valid=False fmax=None reject=error
+[16:20:20]   t-h5-02-3: valid=False fmax=None reject=error
+[16:20:20] h5: 0 trials, best=None plateau=None
+[16:20:20] h5 iter 3: parent t-h2-02-3 fmax=1332.2
+[16:20:21]   t-h5-03-0: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:21]   t-h5-03-1: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:21]   t-h5-03-2: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:21]   t-h5-03-3: pipeline_register - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:21]   t-h5-03-0: valid=False fmax=None reject=error
+[16:20:21]   t-h5-03-1: valid=False fmax=None reject=error
+[16:20:21]   t-h5-03-2: valid=False fmax=None reject=error
+[16:20:21]   t-h5-03-3: valid=False fmax=None reject=error
+[16:20:21] h5: 0 trials, best=None plateau=None
+[16:20:22] h5 iter 4: parent t-h2-02-3 fmax=1332.2
+[16:20:22]   t-h5-04-0: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:22]   t-h5-04-1: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:22]   t-h5-04-2: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:22]   t-h5-04-3: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:22]   t-h5-04-0: valid=False fmax=None reject=error
+[16:20:22]   t-h5-04-1: valid=False fmax=None reject=error
+[16:20:22]   t-h5-04-2: valid=False fmax=None reject=error
+[16:20:22]   t-h5-04-3: valid=False fmax=None reject=error
+[16:20:23] h5: 0 trials, best=None plateau=None
+[16:20:23] h5 iter 5: parent t-h2-02-3 fmax=1332.2
+[16:20:24]   t-h5-05-0: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:24]   t-h5-05-1: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:24]   t-h5-05-2: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:24]   t-h5-05-3: pipeline_register - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:24]   t-h5-05-0: valid=False fmax=None reject=error
+[16:20:24]   t-h5-05-1: valid=False fmax=None reject=error
+[16:20:24]   t-h5-05-2: valid=False fmax=None reject=error
+[16:20:24]   t-h5-05-3: valid=False fmax=None reject=error
+[16:20:24] h5: 0 trials, best=None plateau=None
+[16:20:25] h5 iter 6: parent t-h2-02-3 fmax=1332.2
+[16:20:25]   t-h5-06-0: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:25]   t-h5-06-1: accumulator_split - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:25]   t-h5-06-2: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:25]   t-h5-06-3: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:25]   t-h5-06-0: valid=False fmax=None reject=error
+[16:20:25]   t-h5-06-1: valid=False fmax=None reject=error
+[16:20:25]   t-h5-06-2: valid=False fmax=None reject=error
+[16:20:25]   t-h5-06-3: valid=False fmax=None reject=error
+[16:20:26] h5: 0 trials, best=None plateau=None
+[16:20:26] h5 iter 7: parent t-h2-02-3 fmax=1332.2
+[16:20:26]   t-h5-07-0: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:26]   t-h5-07-1: accumulator_split - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:26]   t-h5-07-2: accumulator_split - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:26]   t-h5-07-3: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:27]   t-h5-07-0: valid=False fmax=None reject=error
+[16:20:27]   t-h5-07-1: valid=False fmax=None reject=error
+[16:20:27]   t-h5-07-2: valid=False fmax=None reject=error
+[16:20:27]   t-h5-07-3: valid=False fmax=None reject=error
+[16:20:27] h5: 0 trials, best=None plateau=None
+[16:20:27] h5 iter 8: parent t-h2-02-3 fmax=1332.2
+[16:20:28]   t-h5-08-0: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:28]   t-h5-08-1: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:28]   t-h5-08-2: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:28]   t-h5-08-3: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:28]   t-h5-08-0: valid=False fmax=None reject=error
+[16:20:28]   t-h5-08-1: valid=False fmax=None reject=error
+[16:20:28]   t-h5-08-2: valid=False fmax=None reject=error
+[16:20:28]   t-h5-08-3: valid=False fmax=None reject=error
+[16:20:29] h5: 0 trials, best=None plateau=None
+[16:20:29] h5 iter 9: parent t-h2-02-3 fmax=1332.2
+[16:20:29]   t-h5-09-0: pipeline_register - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:29]   t-h5-09-1: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:29]   t-h5-09-2: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:29]   t-h5-09-3: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:30]   t-h5-09-0: valid=False fmax=None reject=error
+[16:20:30]   t-h5-09-1: valid=False fmax=None reject=error
+[16:20:30]   t-h5-09-2: valid=False fmax=None reject=error
+[16:20:30]   t-h5-09-3: valid=False fmax=None reject=error
+[16:20:30] h5: 0 trials, best=None plateau=None
+[16:20:30] h5 iter 10: parent t-h2-02-3 fmax=1332.2
+[16:20:31]   t-h5-10-0: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:31]   t-h5-10-1: accumulator_split - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:31]   t-h5-10-2: micro_optimization - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure
+[16:20:31]   t-h5-10-3: accumulator_split - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:31]   t-h5-10-0: valid=False fmax=None reject=error
+[16:20:31]   t-h5-10-1: valid=False fmax=None reject=error
+[16:20:31]   t-h5-10-2: valid=False fmax=None reject=error
+[16:20:31]   t-h5-10-3: valid=False fmax=None reject=error
+[16:20:32] h5: 0 trials, best=None plateau=None
+[16:20:32] h5 iter 11: parent t-h2-02-3 fmax=1332.2
+[16:20:32]   t-h5-11-0: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:32]   t-h5-11-1: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:32]   t-h5-11-2: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:32]   t-h5-11-3: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:33]   t-h5-11-0: valid=False fmax=None reject=error
+[16:20:33]   t-h5-11-1: valid=False fmax=None reject=error
+[16:20:33]   t-h5-11-2: valid=False fmax=None reject=error
+[16:20:33]   t-h5-11-3: valid=False fmax=None reject=error
+[16:20:33] h5: 0 trials, best=None plateau=None
+[16:20:33] h5 iter 12: parent t-h2-02-3 fmax=1332.2
+[16:20:34]   t-h5-12-0: accumulator_split - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:34]   t-h5-12-1: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:34]   t-h5-12-2: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:34]   t-h5-12-3: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:34]   t-h5-12-0: valid=False fmax=None reject=error
+[16:20:34]   t-h5-12-1: valid=False fmax=None reject=error
+[16:20:34]   t-h5-12-2: valid=False fmax=None reject=error
+[16:20:34]   t-h5-12-3: valid=False fmax=None reject=error
+[16:20:34] h5: 0 trials, best=None plateau=None
+[16:20:35] h5 iter 13: parent t-h2-02-3 fmax=1332.2
+[16:20:35]   t-h5-13-0: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:35]   t-h5-13-1: accumulator_split - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:35]   t-h5-13-2: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:35]   t-h5-13-3: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:35]   t-h5-13-0: valid=False fmax=None reject=error
+[16:20:35]   t-h5-13-1: valid=False fmax=None reject=error
+[16:20:35]   t-h5-13-2: valid=False fmax=None reject=error
+[16:20:35]   t-h5-13-3: valid=False fmax=None reject=error
+[16:20:36] h5: 0 trials, best=None plateau=None
+[16:20:37] h5 iter 14: parent t-h2-02-3 fmax=1332.2
+[16:20:37]   t-h5-14-0: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:37]   t-h5-14-1: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:37]   t-h5-14-2: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:37]   t-h5-14-3: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:37]   t-h5-14-0: valid=False fmax=None reject=error
+[16:20:37]   t-h5-14-1: valid=False fmax=None reject=error
+[16:20:37]   t-h5-14-2: valid=False fmax=None reject=error
+[16:20:37]   t-h5-14-3: valid=False fmax=None reject=error
+[16:20:38] h5: 0 trials, best=None plateau=None
+[16:20:38] h5 iter 15: parent t-h2-02-3 fmax=1332.2
+[16:20:39]   t-h5-15-0: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:39]   t-h5-15-1: micro_optimization - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure
+[16:20:39]   t-h5-15-2: accumulator_split - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:39]   t-h5-15-3: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:39]   t-h5-15-0: valid=False fmax=None reject=error
+[16:20:39]   t-h5-15-1: valid=False fmax=None reject=error
+[16:20:39]   t-h5-15-2: valid=False fmax=None reject=error
+[16:20:39]   t-h5-15-3: valid=False fmax=None reject=error
+[16:20:39] h5: 0 trials, best=None plateau=None
+[16:20:40] h5 iter 16: parent t-h2-02-3 fmax=1332.2
+[16:20:40]   t-h5-16-0: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:40]   t-h5-16-1: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:40]   t-h5-16-2: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:40]   t-h5-16-3: micro_optimization - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure
+[16:20:40]   t-h5-16-0: valid=False fmax=None reject=error
+[16:20:40]   t-h5-16-1: valid=False fmax=None reject=error
+[16:20:40]   t-h5-16-2: valid=False fmax=None reject=error
+[16:20:40]   t-h5-16-3: valid=False fmax=None reject=error
+[16:20:41] h5: 0 trials, best=None plateau=None
+[16:20:41] h5 iter 17: parent t-h2-02-3 fmax=1332.2
+[16:20:42]   t-h5-17-0: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:42]   t-h5-17-1: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:42]   t-h5-17-2: micro_optimization - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure
+[16:20:42]   t-h5-17-3: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:42]   t-h5-17-0: valid=False fmax=None reject=error
+[16:20:42]   t-h5-17-1: valid=False fmax=None reject=error
+[16:20:42]   t-h5-17-2: valid=False fmax=None reject=error
+[16:20:42]   t-h5-17-3: valid=False fmax=None reject=error
+[16:20:43] h5: 0 trials, best=None plateau=None
+[16:20:43] h5 iter 18: parent t-h2-02-3 fmax=1332.2
+[16:20:43]   t-h5-18-0: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:43]   t-h5-18-1: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:43]   t-h5-18-2: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:43]   t-h5-18-3: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:44]   t-h5-18-0: valid=False fmax=None reject=error
+[16:20:44]   t-h5-18-1: valid=False fmax=None reject=error
+[16:20:44]   t-h5-18-2: valid=False fmax=None reject=error
+[16:20:44]   t-h5-18-3: valid=False fmax=None reject=error
+[16:20:44] h5: 0 trials, best=None plateau=None
+[16:20:45] h5 iter 19: parent t-h2-02-3 fmax=1332.2
+[16:20:45]   t-h5-19-0: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:45]   t-h5-19-1: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:45]   t-h5-19-2: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:45]   t-h5-19-3: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:45]   t-h5-19-0: valid=False fmax=None reject=error
+[16:20:45]   t-h5-19-1: valid=False fmax=None reject=error
+[16:20:45]   t-h5-19-2: valid=False fmax=None reject=error
+[16:20:45]   t-h5-19-3: valid=False fmax=None reject=error
+[16:20:46] h5: 0 trials, best=None plateau=None
+[16:20:46] h5 iter 20: parent t-h2-02-3 fmax=1332.2
+[16:20:47]   t-h5-20-0: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:47]   t-h5-20-1: logic_restructure - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure 
+[16:20:47]   t-h5-20-2: retiming - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sure your key 
+[16:20:47]   t-h5-20-3: output_mux_pipeline - APIStatusError: Error code: 402 - {'error': {'message': 'Insufficient credits. This account never purchased credits. Make sur
+[16:20:47]   t-h5-20-0: valid=False fmax=None reject=error
+[16:20:47]   t-h5-20-1: valid=False fmax=None reject=error
+[16:20:47]   t-h5-20-2: valid=False fmax=None reject=error
+[16:20:47]   t-h5-20-3: valid=False fmax=None reject=error
+[16:20:48] h5: 0 trials, best=None plateau=None
+[16:20:48] done. best: t-h2-02-3 1332.2 MHz

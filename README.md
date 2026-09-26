@@ -91,6 +91,12 @@ On Apple Silicon, ORFS runs under Rosetta with `LEC_CHECK=0`: about 5 min per fu
 | `dashboard/` | Next.js dashboard |
 | `eda/` | Toolchain setup and feasibility test |
 
+## Thanks
+- **[OpenRouter](https://openrouter.ai)**: every design and evolution agent call ran through OpenRouter, on hackathon credits plus a top-up. Thank you for the credits and the one-key access to models.
+- **MongoDB**, for the Atlas Hackathon Sandbox, and **Cerebral Valley**, for hosting.
+- **AWS** (Strands Agents), **LangChain** (LangGraph) and **Vercel**, for the tools this runs on.
+- The **OpenROAD**, **Yosys** and **OSS CAD Suite** projects, for open-source chip design.
+
 ## Prepared before the event (Sep 25)
 Planning and environment setup only:
 - the interface contract and mock data (`contract/`)

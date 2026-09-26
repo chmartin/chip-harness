@@ -69,6 +69,10 @@ def propose(s: S) -> S:
         props = list(ex.map(one, enumerate(picks)))
     for p in props:
         log(f"  {p['trial_id']}: {p.get('fix_family')} - {p.get('goal') or p.get('error') or 'cached'}"[:160])
+    if all("error" in p and "rtl" not in p for p in props):
+        # every LLM call failed (credits, key, provider down): stop instead of burning iterations.
+        # Resume later with --resume; errored trials are retried.
+        raise SystemExit(f"all {len(props)} proposals failed - stopping. First error: {props[0]['error'][:300]}")
     return {"proposals": props}
 
 
