@@ -132,6 +132,7 @@ function Chart({ trials, versions, vmap }) {
   const bestPath = bestPts.map(([px, py], k) => (k ? `H${px}V${py}` : `M${px},${py}`)).join("");
   const firstIdx = {}; trials.forEach((t, i) => { if (!(t.harness_version in firstIdx)) firstIdx[t.harness_version] = i; });
   const markers = versions.filter((v) => v.created_by === "evolution-loop" && v._id in firstIdx);
+  const targets = trials.map((t, i) => [i, t.clock_target_mhz]).filter(([i, c], k, a) => k > 0 && c && c !== a[k - 1][1]);
 
   const onMove = (e) => {
     const r = e.currentTarget.getBoundingClientRect();
@@ -154,6 +155,9 @@ function Chart({ trials, versions, vmap }) {
         {markers.map((v) => <g key={v._id}>
           <line x1={x(firstIdx[v._id]) - 0.5} x2={x(firstIdx[v._id]) - 0.5} y1={m.t - 6} y2={m.t + ph} stroke="var(--text-muted)" strokeDasharray="3 3" />
           <text x={x(firstIdx[v._id]) + 4} y={m.t - 8} style={{ fill: "var(--text-secondary)" }}>{v._id} evolved</text></g>)}
+        {targets.map(([i, c]) => <g key={`c${i}`}>
+          <line x1={x(i) - 0.5} x2={x(i) - 0.5} y1={m.t + 10} y2={m.t + ph} stroke="var(--s8)" strokeDasharray="1 3" />
+          <text x={x(i) + 4} y={m.t + 20} style={{ fill: "var(--text-secondary)" }}>target → {c} MHz</text></g>)}
         <path d={bestPath} fill="none" stroke="var(--text-secondary)" strokeWidth="2" />
         {trials.map((t, i) => t.score?.valid ? null :
           <line key={t._id} x1={x(i)} x2={x(i)} y1={H - m.b + 8} y2={H - m.b + 18} stroke="var(--reject)" strokeWidth="2" strokeLinecap="round" />)}

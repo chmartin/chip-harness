@@ -1,6 +1,35 @@
-# Interface Contract — v1.2
+# Interface Contract — v1.3
 
 Collections: `harness_versions`, `trials`, `lessons`, `harness_settings`. Shared shapes for everyone. Code against this, not against each other. Changes need Chris's OK; bump the version at the top.
+
+**v1.3 (Sep 26, as built).** Where these notes conflict with the sections below, the notes win.
+- `trials.stages.tier2.wns_ns` holds the **signed** worst setup slack (`finish__timing__setup__ws`). ORFS clamps wns to 0 when timing is met, which would hide headroom. `fmax_mhz = 1000 / (period_ns − wns_ns)`.
+- New trial fields:
+  - `design.rtl`: the full RTL text, so any trial can be a parent on any machine.
+  - `stages.*.log_tail`: on failures.
+- Trial ids are deterministic: `t-<version>-<iteration:02>-<slot>`. The baseline is `t-h1-00` (iteration 0).
+- Trials that fail before producing any RTL (LLM or API errors) are stored with `design: null` and `reject_reason: "error"`. The next run deletes and retries them. The plateau check ignores them and the baseline.
+- `harness_versions.config` changes:
+  - New keys:
+    - `tools`: subset of `["tier1_check"]`, which runs the testbench and Tier 1 on a draft
+    - `context.lessons`: 0–8 lessons injected into the prompt
+  - `reports_read` ⊂ `["summary_slack", "critical_path", "tier1_stats"]`
+  - `tier2_policy` is now `{"max_tier1_regression_ns": null | 0–2}`: skip Tier 2 when the Tier 1 estimate is worse than the parent's by more than this. It is relative because Yosys/ABC slack is pessimistic in absolute terms: −1.57 ns estimated versus −0.10 ns after routing on the baseline.
+  - The evolution agent's output is sanitized to these option sets. `models` is never changed.
+  - Also new: `llm` on evolved versions.
+- Version `status`: when the seed plateaus it becomes `"kept"` with `verdict: null`.
+- Plateau policy in use (tightened for a single-day run):
+
+  | Setting | Value |
+  |---|---|
+  | `min_trials` | 4 |
+  | `no_gain.window_valid_trials` | 3 |
+  | `stuck_rejecting.consecutive_rejects` | 4 |
+  | `budget_cap.max_trials` | 8 |
+  | `keep_min_gain_pct` | 1.0 |
+
+- `lessons`: one per trial with RTL (`_id: l-<trial_id>`), plus `l-<version>-retired` for retired harnesses. Retrieval is a plain query on `fix_family` and recency; there is no vector index.
+- Clock target: 1000 MHz by default, overridable with the `CLOCK_MHZ` env var. `clock_target_mhz` is stored on every trial.
 
 **Conventions**
 - Two loops: the **design loop** runs every trial (agent edits RTL → testbench → Tier 1 → Tier 2 → score); the **evolution loop** runs on a plateau and rewrites the harness config as a new version.

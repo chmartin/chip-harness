@@ -77,8 +77,8 @@ def propose(version: dict, parent: dict, fix_family: str, slot: int) -> dict:
     cfg = version["config"]
     model_id = cfg["models"]["design"]
     t2 = (parent.get("stages") or {}).get("tier2") or {}
-    ctx = [f"Clock target: {parent.get('clock_target_mhz', 1000)} MHz "
-           f"(period {1000 / parent.get('clock_target_mhz', 1000):.2f} ns)."]
+    ctx = [f"Clock target: {config.DEFAULT_CLOCK_MHZ} MHz "
+           f"(period {1000 / config.DEFAULT_CLOCK_MHZ:.2f} ns)."]
     if "summary_slack" in cfg["reports_read"]:
         ctx.append(f"Parent design: worst setup slack {t2.get('wns_ns')} ns, fmax {parent['score'].get('fmax_mhz')} MHz, "
                    f"area {t2.get('area_um2')} um^2.")
@@ -105,7 +105,7 @@ def propose(version: dict, parent: dict, fix_family: str, slot: int) -> dict:
                 tb = eda.testbench(p, Path(d) / "tb")
                 if tb["status"] != "pass":
                     return f"TESTBENCH {tb['status'].upper()}:\n{tb['log_tail']}"
-                t1 = eda.tier1(p, Path(d) / "t1", 1000 / parent.get("clock_target_mhz", 1000))
+                t1 = eda.tier1(p, Path(d) / "t1", 1000 / config.DEFAULT_CLOCK_MHZ)
                 ref = ((parent.get("stages") or {}).get("tier1") or {}).get("est_slack_ns")
                 return (f"TESTBENCH PASS. Tier1: est_slack_ns={t1.get('est_slack_ns')} (parent: {ref}; the estimate "
                         f"is pessimistic, compare relative to the parent) cells={t1.get('cells')} area={t1.get('area_um2')}")

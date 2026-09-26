@@ -26,4 +26,4 @@ MONGODB_URI = os.environ.get("MONGODB_URI", "")
 MONGODB_DB = os.environ.get("MONGODB_DB", "chipharness")
 
 DEFAULT_TOP = "mac_array"
-DEFAULT_CLOCK_MHZ = 1000
+DEFAULT_CLOCK_MHZ = int(os.environ.get("CLOCK_MHZ", "1000"))

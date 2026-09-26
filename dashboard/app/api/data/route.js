@@ -17,7 +17,7 @@ export async function GET() {
       db.collection("harness_versions").find({}, { projection: { plateau_policy: 0, llm: 0 } })
         .sort({ version: 1 }).toArray(),
       db.collection("trials").find({ status: { $in: ["done", "error"] }, design: { $ne: null } }, {
-        projection: { harness_version: 1, iteration: 1, created_at: 1, finished_at: 1, status: 1, goal: 1,
+        projection: { harness_version: 1, clock_target_mhz: 1, iteration: 1, created_at: 1, finished_at: 1, status: 1, goal: 1,
           score: 1, "stages.tier2.wns_ns": 1, "stages.tier2.drc_count": 1, "stages.tier2.area_um2": 1,
           "stages.testbench.status": 1, "diagnosis.fix_family": 1 },
       }).sort({ finished_at: 1 }).limit(1000).toArray(),

@@ -22,3 +22,6 @@ out/
 runs/
 harness/eda_assets/*.lib
 dashboard/.env.local
+# Office lock files
+~$*
+!.env.local.example
