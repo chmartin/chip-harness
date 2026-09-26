@@ -1,0 +1,15 @@
+{
+  "_id": "plateau_policy",
+  "min_trials": 6,
+  "no_gain": {
+    "window_valid_trials": 5,
+    "min_gain_pct": 1.0
+  },
+  "stuck_rejecting": {
+    "consecutive_rejects": 5
+  },
+  "budget_cap": {
+    "max_trials": 15
+  },
+  "keep_min_gain_pct": 1.0
+}

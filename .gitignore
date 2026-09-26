@@ -1,0 +1,23 @@
+# EDA scratch output (large; includes OSS CAD Suite install)
+eda/eda-test/
+**/eda-test/
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+*.egg-info/
+# Secrets
+.env
+.env.*
+!.env.example
+# Node / Next.js
+node_modules/
+.next/
+out/
+.vercel/
+# OS
+.DS_Store
+# Harness run output
+runs/
+harness/eda_assets/*.lib

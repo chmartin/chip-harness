@@ -1,0 +1,80 @@
+OpenROAD unknown 
+Features included (+) or not (-): -GPU +GUI -Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 10 thread(s).
+read_liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+read_db ./results/nangate45/gcd/base/6_1_fill.odb
+read_sdc ./results/nangate45/gcd/base/6_1_fill.sdc
+source /OpenROAD-flow-scripts/flow/platforms/nangate45/setRC.tcl
+[WARNING STA-0450] virtual clock vclk_core_clock can not be propagated.
+write_db ./results/nangate45/gcd/base/6_final.odb
+write_sdc -no_timestamp ./results/nangate45/gcd/base/6_final.sdc
+Deleted 0 routing obstructions
+[INFO RCX-0431] Defined process_corner X with ext_model_index 0
+[INFO RCX-0029] Defined extraction corner X
+[INFO RCX-0435] Reading extraction model file /OpenROAD-flow-scripts/flow/platforms/nangate45/rcx_patterns.rules ...
+[INFO RCX-0436] RC segment generation gcd (max_merge_res 50.0) ...
+[INFO RCX-0040] Final 1827 rc segments
+[INFO RCX-0439] Coupling Cap extraction gcd ...
+[INFO RCX-0440] Coupling threshhold is 0.1000 fF, coupling capacitance less than 0.1000 fF will be grounded.
+[INFO RCX-0442] 48% of 3530 wires extracted
+[INFO RCX-0442] 100% of 3530 wires extracted
+[INFO RCX-0045] Extract 757 nets, 2565 rsegs, 2565 caps, 5187 ccs
+[INFO RCX-0443] 757 nets finished
+[INFO PSM-0040] All shapes on net VDD are connected.
+[INFO PSM-0073] Using bump pattern on metal4 with x-pitch 140.0000um, y-pitch 140.0000um, and size 70.0000um with a reduction factor of 3x.
+########## IR report #################
+Net              : VDD
+Corner           : default
+Total power      : 6.33e-03 W
+Supply voltage   : 1.10e+00 V
+Worstcase voltage: 1.09e+00 V
+Average voltage  : 1.10e+00 V
+Average IR drop  : 4.98e-03 V
+Worstcase IR drop: 1.40e-02 V
+Percentage drop  : 1.28 %
+######################################
+[INFO PSM-0040] All shapes on net VSS are connected.
+[INFO PSM-0073] Using bump pattern on metal7 with x-pitch 140.0000um, y-pitch 140.0000um, and size 70.0000um with a reduction factor of 3x.
+########## IR report #################
+Net              : VSS
+Corner           : default
+Total power      : 6.33e-03 W
+Supply voltage   : 0.00e+00 V
+Worstcase voltage: 7.03e-03 V
+Average voltage  : 4.16e-03 V
+Average IR drop  : 4.16e-03 V
+Worstcase IR drop: 7.03e-03 V
+Percentage drop  : 0.64 %
+######################################
+Cell type report:                       Count       Area
+  Fill cell                               233     133.27
+  Tap cell                                 46      12.24
+  Clock buffer                              7       8.25
+  Timing Repair Buffer                    182     177.95
+  Inverter                                 86      64.11
+  Clock inverter                            1       0.80
+  Timing Repair inverter                    1       2.39
+  Sequential cell                          35     158.27
+  Multi-Input combinational cell          377     519.50
+  Total                                   968    1076.77
+Report metrics stage 6, finish...
+
+==========================================================================
+finish report_design_area
+--------------------------------------------------------------------------
+Design area 944 um^2 88% utilization.
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/gcd/base/final_all.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/gcd/base/final_routing.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/gcd/base/final_placement.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/gcd/base/final_ir_drop.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/gcd/base/final_clocks.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/gcd/base/cts_default_core_clock.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/gcd/base/cts_default_core_clock_layout.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/gcd/base/final_resizer.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/gcd/base/final_congestion.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/gcd/base/final_worst_path.webp.png
+Elapsed time: 0:02.91[h:]min:sec. CPU time: user 2.81 sys 0.23 (104%). Peak memory: 230084KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+6_report                                  2            224                  N/A

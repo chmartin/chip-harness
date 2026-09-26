@@ -1,0 +1,76 @@
+OpenROAD unknown 
+Features included (+) or not (-): -GPU +GUI -Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 10 thread(s).
+read_liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+read_db ./results/nangate45/mac_array/base/6_1_fill.odb
+read_sdc ./results/nangate45/mac_array/base/6_1_fill.sdc
+source /OpenROAD-flow-scripts/flow/platforms/nangate45/setRC.tcl
+write_db ./results/nangate45/mac_array/base/6_final.odb
+write_sdc -no_timestamp ./results/nangate45/mac_array/base/6_final.sdc
+Deleted 0 routing obstructions
+[INFO RCX-0431] Defined process_corner X with ext_model_index 0
+[INFO RCX-0029] Defined extraction corner X
+[INFO RCX-0435] Reading extraction model file /OpenROAD-flow-scripts/flow/platforms/nangate45/rcx_patterns.rules ...
+[INFO RCX-0436] RC segment generation mac_array (max_merge_res 50.0) ...
+[INFO RCX-0040] Final 20623 rc segments
+[INFO RCX-0439] Coupling Cap extraction mac_array ...
+[INFO RCX-0440] Coupling threshhold is 0.1000 fF, coupling capacitance less than 0.1000 fF will be grounded.
+[INFO RCX-0442] 48% of 32876 wires extracted
+[INFO RCX-0442] 100% of 32876 wires extracted
+[INFO RCX-0045] Extract 6542 nets, 26757 rsegs, 26757 caps, 48730 ccs
+[INFO RCX-0443] 6542 nets finished
+[INFO PSM-0040] All shapes on net VDD are connected.
+########## IR report #################
+Net              : VDD
+Corner           : default
+Total power      : 1.80e-02 W
+Supply voltage   : 1.10e+00 V
+Worstcase voltage: 1.09e+00 V
+Average voltage  : 1.10e+00 V
+Average IR drop  : 4.41e-03 V
+Worstcase IR drop: 8.33e-03 V
+Percentage drop  : 0.76 %
+######################################
+[INFO PSM-0040] All shapes on net VSS are connected.
+########## IR report #################
+Net              : VSS
+Corner           : default
+Total power      : 1.80e-02 W
+Supply voltage   : 0.00e+00 V
+Worstcase voltage: 1.09e-02 V
+Average voltage  : 4.71e-03 V
+Average IR drop  : 4.71e-03 V
+Worstcase IR drop: 1.09e-02 V
+Percentage drop  : 0.99 %
+######################################
+Cell type report:                       Count       Area
+  Fill cell                              6719   13454.55
+  Tap cell                                268      71.29
+  Clock buffer                            106     125.55
+  Timing Repair Buffer                    142     131.40
+  Inverter                                458     243.66
+  Clock inverter                           28      19.42
+  Sequential cell                         408    2151.41
+  Multi-Input combinational cell         4290    6458.48
+  Total                                 12419   22655.75
+Report metrics stage 6, finish...
+
+==========================================================================
+finish report_design_area
+--------------------------------------------------------------------------
+Design area 9201 um^2 41% utilization.
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/mac_array/base/final_all.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/mac_array/base/final_routing.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/mac_array/base/final_placement.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/mac_array/base/final_ir_drop.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/mac_array/base/final_clocks.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/mac_array/base/cts_default_core_clock.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/mac_array/base/cts_default_core_clock_layout.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/mac_array/base/final_resizer.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/mac_array/base/final_congestion.webp.png
+[WARNING GUI-0010] File path does not end with a valid extension, new path is: ./reports/nangate45/mac_array/base/final_worst_path.webp.png
+Elapsed time: 0:06.94[h:]min:sec. CPU time: user 7.76 sys 0.88 (124%). Peak memory: 329076KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+6_report                                  6            321                  N/A

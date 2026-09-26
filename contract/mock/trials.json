@@ -1,0 +1,1326 @@
+[
+  {
+    "_id": "t-h1-01",
+    "harness_version": "h1",
+    "iteration": 1,
+    "parent_trial_id": null,
+    "created_at": "2026-09-26T13:00:00Z",
+    "finished_at": "2026-09-26T13:04:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h1-01",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "a6a3a45",
+      "rtl_path": "trials/t-h1-01/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1549,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "fail",
+        "wns_ns": null,
+        "tns_ns": null,
+        "area_um2": null,
+        "drc_count": null,
+        "power_mw": null,
+        "duration_s": 98
+      }
+    },
+    "score": {
+      "valid": false,
+      "fmax_mhz": null,
+      "reject_reason": "tier2_fail"
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "flow_knob",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 9186,
+      "tokens_out": 2994,
+      "cost_usd": 0.009,
+      "trace_url": null
+    },
+    "lesson_ids": []
+  },
+  {
+    "_id": "t-h1-02",
+    "harness_version": "h1",
+    "iteration": 2,
+    "parent_trial_id": "t-h1-01",
+    "created_at": "2026-09-26T13:04:00Z",
+    "finished_at": "2026-09-26T13:08:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h1-02",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "1600a35",
+      "rtl_path": "trials/t-h1-02/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1944,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": -1.198,
+        "tns_ns": -35.94,
+        "area_um2": 2633.1,
+        "drc_count": 0,
+        "power_mw": 4.41,
+        "duration_s": 203
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 455,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "flow_knob",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 14851,
+      "tokens_out": 1086,
+      "cost_usd": 0.024,
+      "trace_url": null
+    },
+    "lesson_ids": []
+  },
+  {
+    "_id": "t-h1-03",
+    "harness_version": "h1",
+    "iteration": 3,
+    "parent_trial_id": "t-h1-02",
+    "created_at": "2026-09-26T13:08:00Z",
+    "finished_at": "2026-09-26T13:12:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h1-03",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "f28c105",
+      "rtl_path": "trials/t-h1-03/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1728,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": -1.16,
+        "tns_ns": -34.8,
+        "area_um2": 2620.4,
+        "drc_count": 0,
+        "power_mw": 3.56,
+        "duration_s": 226
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 463,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "flow_knob",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 18332,
+      "tokens_out": 1053,
+      "cost_usd": 0.058,
+      "trace_url": null
+    },
+    "lesson_ids": [
+      "l-001"
+    ]
+  },
+  {
+    "_id": "t-h1-04",
+    "harness_version": "h1",
+    "iteration": 4,
+    "parent_trial_id": "t-h1-03",
+    "created_at": "2026-09-26T13:12:00Z",
+    "finished_at": "2026-09-26T13:16:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h1-04",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "4a23d59",
+      "rtl_path": "trials/t-h1-04/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1929,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": -1.137,
+        "tns_ns": -34.11,
+        "area_um2": 2558.7,
+        "drc_count": 0,
+        "power_mw": 4.48,
+        "duration_s": 192
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 468,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "flow_knob",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 10363,
+      "tokens_out": 1282,
+      "cost_usd": 0.057,
+      "trace_url": null
+    },
+    "lesson_ids": [
+      "l-002"
+    ]
+  },
+  {
+    "_id": "t-h1-05",
+    "harness_version": "h1",
+    "iteration": 5,
+    "parent_trial_id": "t-h1-04",
+    "created_at": "2026-09-26T13:16:00Z",
+    "finished_at": "2026-09-26T13:20:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h1-05",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "5f55720",
+      "rtl_path": "trials/t-h1-05/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1599,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": -1.146,
+        "tns_ns": -34.38,
+        "area_um2": 2624.1,
+        "drc_count": 0,
+        "power_mw": 4.18,
+        "duration_s": 196
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 466,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "flow_knob",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 16974,
+      "tokens_out": 1057,
+      "cost_usd": 0.056,
+      "trace_url": null
+    },
+    "lesson_ids": [
+      "l-003"
+    ]
+  },
+  {
+    "_id": "t-h1-06",
+    "harness_version": "h1",
+    "iteration": 6,
+    "parent_trial_id": "t-h1-05",
+    "created_at": "2026-09-26T13:20:00Z",
+    "finished_at": "2026-09-26T13:24:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h1-06",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "c6f8771",
+      "rtl_path": "trials/t-h1-06/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1821,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": -1.137,
+        "tns_ns": -34.11,
+        "area_um2": 2647.6,
+        "drc_count": 0,
+        "power_mw": 4.0,
+        "duration_s": 224
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 468,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "flow_knob",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 15628,
+      "tokens_out": 2656,
+      "cost_usd": 0.036,
+      "trace_url": null
+    },
+    "lesson_ids": [
+      "l-004"
+    ]
+  },
+  {
+    "_id": "t-h1-07",
+    "harness_version": "h1",
+    "iteration": 7,
+    "parent_trial_id": "t-h1-06",
+    "created_at": "2026-09-26T13:24:00Z",
+    "finished_at": "2026-09-26T13:28:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h1-07",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "14f4733",
+      "rtl_path": "trials/t-h1-07/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 2088,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": -1.137,
+        "tns_ns": -34.11,
+        "area_um2": 2499.4,
+        "drc_count": 0,
+        "power_mw": 3.68,
+        "duration_s": 239
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 468,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "flow_knob",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 12919,
+      "tokens_out": 2951,
+      "cost_usd": 0.05,
+      "trace_url": null
+    },
+    "lesson_ids": [
+      "l-005"
+    ]
+  },
+  {
+    "_id": "t-h1-08",
+    "harness_version": "h1",
+    "iteration": 8,
+    "parent_trial_id": "t-h1-07",
+    "created_at": "2026-09-26T13:28:00Z",
+    "finished_at": "2026-09-26T13:32:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h1-08",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "1e398f1",
+      "rtl_path": "trials/t-h1-08/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 2024,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": -1.137,
+        "tns_ns": -34.11,
+        "area_um2": 2537.4,
+        "drc_count": 0,
+        "power_mw": 3.95,
+        "duration_s": 228
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 468,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "flow_knob",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 14850,
+      "tokens_out": 1475,
+      "cost_usd": 0.076,
+      "trace_url": null
+    },
+    "lesson_ids": [
+      "l-006"
+    ]
+  },
+  {
+    "_id": "t-h2-01",
+    "harness_version": "h2",
+    "iteration": 1,
+    "parent_trial_id": null,
+    "created_at": "2026-09-26T13:32:00Z",
+    "finished_at": "2026-09-26T13:36:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h2-01",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "6bf46c6",
+      "rtl_path": "trials/t-h2-01/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "fail",
+        "failures": 3,
+        "log_tail": "TB FAIL (3 errors)",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "skipped",
+        "cells": null,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": null
+      },
+      "tier2": {
+        "status": "skipped",
+        "wns_ns": null,
+        "tns_ns": null,
+        "area_um2": null,
+        "drc_count": null,
+        "power_mw": null,
+        "duration_s": null
+      }
+    },
+    "score": {
+      "valid": false,
+      "fmax_mhz": null,
+      "reject_reason": "testbench_fail"
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "accumulator_width",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 8642,
+      "tokens_out": 1117,
+      "cost_usd": 0.076,
+      "trace_url": null
+    },
+    "lesson_ids": []
+  },
+  {
+    "_id": "t-h2-02",
+    "harness_version": "h2",
+    "iteration": 2,
+    "parent_trial_id": "t-h2-01",
+    "created_at": "2026-09-26T13:36:00Z",
+    "finished_at": "2026-09-26T13:40:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h2-02",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "b1fee08",
+      "rtl_path": "trials/t-h2-02/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1858,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": -0.391,
+        "tns_ns": -11.73,
+        "area_um2": 2629.2,
+        "drc_count": 0,
+        "power_mw": 4.38,
+        "duration_s": 210
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 719,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "accumulator_width",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 17738,
+      "tokens_out": 2834,
+      "cost_usd": 0.058,
+      "trace_url": null
+    },
+    "lesson_ids": []
+  },
+  {
+    "_id": "t-h2-03",
+    "harness_version": "h2",
+    "iteration": 3,
+    "parent_trial_id": "t-h2-02",
+    "created_at": "2026-09-26T13:40:00Z",
+    "finished_at": "2026-09-26T13:44:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h2-03",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "b271594",
+      "rtl_path": "trials/t-h2-03/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 2180,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": -0.276,
+        "tns_ns": -8.28,
+        "area_um2": 2582.5,
+        "drc_count": 0,
+        "power_mw": 4.34,
+        "duration_s": 207
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 784,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "accumulator_width",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 9064,
+      "tokens_out": 1048,
+      "cost_usd": 0.073,
+      "trace_url": null
+    },
+    "lesson_ids": [
+      "l-007"
+    ]
+  },
+  {
+    "_id": "t-h2-04",
+    "harness_version": "h2",
+    "iteration": 4,
+    "parent_trial_id": "t-h2-03",
+    "created_at": "2026-09-26T13:44:00Z",
+    "finished_at": "2026-09-26T13:48:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h2-04",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "b774eb5",
+      "rtl_path": "trials/t-h2-04/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1895,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "fail",
+        "wns_ns": null,
+        "tns_ns": null,
+        "area_um2": null,
+        "drc_count": null,
+        "power_mw": null,
+        "duration_s": 174
+      }
+    },
+    "score": {
+      "valid": false,
+      "fmax_mhz": null,
+      "reject_reason": "tier2_fail"
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "accumulator_width",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 18955,
+      "tokens_out": 2221,
+      "cost_usd": 0.002,
+      "trace_url": null
+    },
+    "lesson_ids": []
+  },
+  {
+    "_id": "t-h2-05",
+    "harness_version": "h2",
+    "iteration": 5,
+    "parent_trial_id": "t-h2-04",
+    "created_at": "2026-09-26T13:48:00Z",
+    "finished_at": "2026-09-26T13:52:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h2-05",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "0f17a30",
+      "rtl_path": "trials/t-h2-05/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1723,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": -0.193,
+        "tns_ns": -5.79,
+        "area_um2": 2584.7,
+        "drc_count": 0,
+        "power_mw": 3.67,
+        "duration_s": 197
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 838,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "accumulator_width",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 12709,
+      "tokens_out": 1329,
+      "cost_usd": 0.074,
+      "trace_url": null
+    },
+    "lesson_ids": []
+  },
+  {
+    "_id": "t-h2-06",
+    "harness_version": "h2",
+    "iteration": 6,
+    "parent_trial_id": "t-h2-05",
+    "created_at": "2026-09-26T13:52:00Z",
+    "finished_at": "2026-09-26T13:56:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h2-06",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "2a96fb1",
+      "rtl_path": "trials/t-h2-06/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1959,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": -0.105,
+        "tns_ns": -3.15,
+        "area_um2": 2559.2,
+        "drc_count": 0,
+        "power_mw": 4.42,
+        "duration_s": 221
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 905,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "pipeline_register",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 14580,
+      "tokens_out": 1938,
+      "cost_usd": 0.088,
+      "trace_url": null
+    },
+    "lesson_ids": [
+      "l-008"
+    ]
+  },
+  {
+    "_id": "t-h2-07",
+    "harness_version": "h2",
+    "iteration": 7,
+    "parent_trial_id": "t-h2-06",
+    "created_at": "2026-09-26T13:56:00Z",
+    "finished_at": "2026-09-26T14:00:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h2-07",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "6a50df4",
+      "rtl_path": "trials/t-h2-07/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1867,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": -0.099,
+        "tns_ns": -2.97,
+        "area_um2": 2727.7,
+        "drc_count": 0,
+        "power_mw": 4.36,
+        "duration_s": 207
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 910,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "flow_knob",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 19185,
+      "tokens_out": 2358,
+      "cost_usd": 0.096,
+      "trace_url": null
+    },
+    "lesson_ids": [
+      "l-009"
+    ]
+  },
+  {
+    "_id": "t-h2-08",
+    "harness_version": "h2",
+    "iteration": 8,
+    "parent_trial_id": "t-h2-07",
+    "created_at": "2026-09-26T14:00:00Z",
+    "finished_at": "2026-09-26T14:04:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h2-08",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "3bbbe9e",
+      "rtl_path": "trials/t-h2-08/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1512,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": -0.1,
+        "tns_ns": -3.0,
+        "area_um2": 2460.4,
+        "drc_count": 0,
+        "power_mw": 3.68,
+        "duration_s": 204
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 909,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "flow_knob",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 15945,
+      "tokens_out": 1546,
+      "cost_usd": 0.026,
+      "trace_url": null
+    },
+    "lesson_ids": [
+      "l-010"
+    ]
+  },
+  {
+    "_id": "t-h3-01",
+    "harness_version": "h3",
+    "iteration": 1,
+    "parent_trial_id": null,
+    "created_at": "2026-09-26T14:04:00Z",
+    "finished_at": "2026-09-26T14:08:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h3-01",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "90fbbd1",
+      "rtl_path": "trials/t-h3-01/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1826,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": -0.098,
+        "tns_ns": -2.94,
+        "area_um2": 2401.6,
+        "drc_count": 0,
+        "power_mw": 3.92,
+        "duration_s": 213
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 911,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "flow_knob",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 10056,
+      "tokens_out": 2911,
+      "cost_usd": 0.095,
+      "trace_url": null
+    },
+    "lesson_ids": []
+  },
+  {
+    "_id": "t-h3-02",
+    "harness_version": "h3",
+    "iteration": 2,
+    "parent_trial_id": "t-h3-01",
+    "created_at": "2026-09-26T14:08:00Z",
+    "finished_at": "2026-09-26T14:12:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h3-02",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "e647cb8",
+      "rtl_path": "trials/t-h3-02/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "fail",
+        "failures": 3,
+        "log_tail": "TB FAIL (3 errors)",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "skipped",
+        "cells": null,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": null
+      },
+      "tier2": {
+        "status": "skipped",
+        "wns_ns": null,
+        "tns_ns": null,
+        "area_um2": null,
+        "drc_count": null,
+        "power_mw": null,
+        "duration_s": null
+      }
+    },
+    "score": {
+      "valid": false,
+      "fmax_mhz": null,
+      "reject_reason": "testbench_fail"
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "accumulator_width",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 19150,
+      "tokens_out": 2407,
+      "cost_usd": 0.04,
+      "trace_url": null
+    },
+    "lesson_ids": []
+  },
+  {
+    "_id": "t-h3-03",
+    "harness_version": "h3",
+    "iteration": 3,
+    "parent_trial_id": "t-h3-02",
+    "created_at": "2026-09-26T14:12:00Z",
+    "finished_at": "2026-09-26T14:16:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h3-03",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "30cbc97",
+      "rtl_path": "trials/t-h3-03/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1568,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": -0.012,
+        "tns_ns": -0.36,
+        "area_um2": 2557.6,
+        "drc_count": 0,
+        "power_mw": 3.98,
+        "duration_s": 215
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 988,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "pipeline_register",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 11420,
+      "tokens_out": 2604,
+      "cost_usd": 0.016,
+      "trace_url": null
+    },
+    "lesson_ids": []
+  },
+  {
+    "_id": "t-h3-04",
+    "harness_version": "h3",
+    "iteration": 4,
+    "parent_trial_id": "t-h3-03",
+    "created_at": "2026-09-26T14:16:00Z",
+    "finished_at": "2026-09-26T14:20:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h3-04",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "26b94c7",
+      "rtl_path": "trials/t-h3-04/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 2049,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": 0.028,
+        "tns_ns": 0.0,
+        "area_um2": 2536.0,
+        "drc_count": 0,
+        "power_mw": 3.55,
+        "duration_s": 190
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 1029,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "flow_knob",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 9662,
+      "tokens_out": 2289,
+      "cost_usd": 0.061,
+      "trace_url": null
+    },
+    "lesson_ids": [
+      "l-011"
+    ]
+  },
+  {
+    "_id": "t-h3-05",
+    "harness_version": "h3",
+    "iteration": 5,
+    "parent_trial_id": "t-h3-04",
+    "created_at": "2026-09-26T14:20:00Z",
+    "finished_at": "2026-09-26T14:24:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h3-05",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "a268aa8",
+      "rtl_path": "trials/t-h3-05/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1758,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": 0.045,
+        "tns_ns": 0.0,
+        "area_um2": 2428.1,
+        "drc_count": 0,
+        "power_mw": 3.71,
+        "duration_s": 214
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 1047,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "pipeline_register",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 13691,
+      "tokens_out": 2291,
+      "cost_usd": 0.047,
+      "trace_url": null
+    },
+    "lesson_ids": [
+      "l-012"
+    ]
+  },
+  {
+    "_id": "t-h3-06",
+    "harness_version": "h3",
+    "iteration": 6,
+    "parent_trial_id": "t-h3-05",
+    "created_at": "2026-09-26T14:24:00Z",
+    "finished_at": "2026-09-26T14:28:00Z",
+    "status": "done",
+    "goal": "Mock goal for t-h3-06",
+    "clock_target_mhz": 1000,
+    "design": {
+      "top": "mac_array",
+      "rtl_sha": "7bdc968",
+      "rtl_path": "trials/t-h3-06/mac_array.v"
+    },
+    "stages": {
+      "testbench": {
+        "status": "pass",
+        "failures": 0,
+        "log_tail": "TB PASS",
+        "duration_s": 1.1
+      },
+      "tier1": {
+        "status": "pass",
+        "cells": 1819,
+        "area_um2": null,
+        "est_slack_ns": null,
+        "duration_s": 2.0
+      },
+      "tier2": {
+        "status": "pass",
+        "wns_ns": 0.039,
+        "tns_ns": 0.0,
+        "area_um2": 2446.1,
+        "drc_count": 0,
+        "power_mw": 3.99,
+        "duration_s": 219
+      }
+    },
+    "score": {
+      "valid": true,
+      "fmax_mhz": 1041,
+      "reject_reason": null
+    },
+    "diagnosis": {
+      "critical_path": "acc \u2192 adder \u2192 acc",
+      "bottleneck": "accumulate adder",
+      "fix_family": "accumulator_width",
+      "notes": ""
+    },
+    "llm": {
+      "model": "openrouter/mock",
+      "tokens_in": 9407,
+      "tokens_out": 1390,
+      "cost_usd": 0.01,
+      "trace_url": null
+    },
+    "lesson_ids": [
+      "l-013"
+    ]
+  }
+]

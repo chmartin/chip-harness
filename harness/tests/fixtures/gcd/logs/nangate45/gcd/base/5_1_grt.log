@@ -1,0 +1,577 @@
+OpenROAD unknown 
+Features included (+) or not (-): -GPU +GUI -Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 10 thread(s).
+read_liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+read_db ./results/nangate45/gcd/base/4_cts.odb
+read_sdc ./results/nangate45/gcd/base/4_cts.sdc
+source /OpenROAD-flow-scripts/flow/platforms/nangate45/setRC.tcl
+pin_access
+[INFO DRT-0149] Reading tech and libs.
+
+Units:                2000
+Number of layers:     21
+Number of macros:     135
+Number of vias:       33
+Number of viarulegen: 19
+
+[INFO DRT-0150] Reading design.
+
+Design:                   gcd
+Die area:                 ( 0 0 ) ( 71510 71510 )
+Number of track patterns: 20
+Number of DEF vias:       0
+Number of components:     731
+Number of terminals:      54
+Number of snets:          2
+Number of nets:           753
+
+[INFO DRT-0167] List of default vias:
+  Layer via2
+    default via: via2_5
+  Layer via3
+    default via: via3_2
+  Layer via4
+    default via: via4_0
+  Layer via5
+    default via: via5_0
+  Layer via6
+    default via: via6_0
+  Layer via7
+    default via: via7_0
+  Layer via8
+    default via: via8_0
+  Layer via9
+    default via: via9_0
+[INFO DRT-0162] Library cell analysis.
+[INFO DRT-0163] Instance analysis.
+[INFO DRT-0164] Number of unique instances = 73.
+[INFO DRT-0168] Init region query.
+[INFO DRT-0024]   Complete active.
+[INFO DRT-0024]   Complete Fr_VIA.
+[INFO DRT-0024]   Complete metal1.
+[INFO DRT-0024]   Complete via1.
+[INFO DRT-0024]   Complete metal2.
+[INFO DRT-0024]   Complete via2.
+[INFO DRT-0024]   Complete metal3.
+[INFO DRT-0024]   Complete via3.
+[INFO DRT-0024]   Complete metal4.
+[INFO DRT-0024]   Complete via4.
+[INFO DRT-0024]   Complete metal5.
+[INFO DRT-0024]   Complete via5.
+[INFO DRT-0024]   Complete metal6.
+[INFO DRT-0024]   Complete via6.
+[INFO DRT-0024]   Complete metal7.
+[INFO DRT-0024]   Complete via7.
+[INFO DRT-0024]   Complete metal8.
+[INFO DRT-0024]   Complete via8.
+[INFO DRT-0024]   Complete metal9.
+[INFO DRT-0024]   Complete via9.
+[INFO DRT-0024]   Complete metal10.
+[INFO DRT-0033] active shape region query size = 0.
+[INFO DRT-0033] FR_VIA shape region query size = 0.
+[INFO DRT-0033] metal1 shape region query size = 10338.
+[INFO DRT-0033] via1 shape region query size = 108.
+[INFO DRT-0033] metal2 shape region query size = 72.
+[INFO DRT-0033] via2 shape region query size = 108.
+[INFO DRT-0033] metal3 shape region query size = 72.
+[INFO DRT-0033] via3 shape region query size = 108.
+[INFO DRT-0033] metal4 shape region query size = 45.
+[INFO DRT-0033] via4 shape region query size = 60.
+[INFO DRT-0033] metal5 shape region query size = 37.
+[INFO DRT-0033] via5 shape region query size = 60.
+[INFO DRT-0033] metal6 shape region query size = 41.
+[INFO DRT-0033] via6 shape region query size = 24.
+[INFO DRT-0033] metal7 shape region query size = 9.
+[INFO DRT-0033] via7 shape region query size = 0.
+[INFO DRT-0033] metal8 shape region query size = 0.
+[INFO DRT-0033] via8 shape region query size = 0.
+[INFO DRT-0033] metal9 shape region query size = 0.
+[INFO DRT-0033] via9 shape region query size = 0.
+[INFO DRT-0033] metal10 shape region query size = 0.
+[INFO DRT-0165] Start pin access.
+[INFO DRT-0078]   Complete 362 pins.
+[INFO DRT-0081]   Complete 73 unique inst patterns.
+[INFO DRT-0084]   Complete 200 groups.
+#scanned instances     = 731
+#unique  instances     = 73
+#stdCellGenAp          = 1971
+#stdCellValidPlanarAp  = 0
+#stdCellValidViaAp     = 1416
+#stdCellPinNoAp        = 0
+#stdCellPinCnt         = 1954
+#instTermValidViaApCnt = 0
+#macroGenAp            = 0
+#macroValidPlanarAp    = 0
+#macroValidViaAp       = 0
+#macroNoAp             = 0
+[INFO DRT-0166] Complete pin access.
+[INFO DRT-0267] cpu time = 00:00:11, elapsed time = 00:00:01, memory = 137.31 (MB), peak = 136.44 (MB)
+global_route -congestion_report_file ./reports/nangate45/gcd/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose
+[INFO GRT-0020] Min routing layer: metal2
+[INFO GRT-0021] Max routing layer: metal10
+[INFO GRT-0022] Global adjustment: 0%
+[INFO GRT-0023] Grid origin: (0, 0)
+[INFO GRT-0088] Layer metal1  Track-Pitch = 0.1400  line-2-Via Pitch: 0.1350
+[INFO GRT-0088] Layer metal2  Track-Pitch = 0.1900  line-2-Via Pitch: 0.1400
+[INFO GRT-0088] Layer metal3  Track-Pitch = 0.1400  line-2-Via Pitch: 0.1400
+[INFO GRT-0088] Layer metal4  Track-Pitch = 0.2800  line-2-Via Pitch: 0.2800
+[INFO GRT-0088] Layer metal5  Track-Pitch = 0.2800  line-2-Via Pitch: 0.2800
+[INFO GRT-0088] Layer metal6  Track-Pitch = 0.2800  line-2-Via Pitch: 0.2800
+[INFO GRT-0088] Layer metal7  Track-Pitch = 0.8000  line-2-Via Pitch: 0.8000
+[INFO GRT-0088] Layer metal8  Track-Pitch = 0.8000  line-2-Via Pitch: 0.8000
+[INFO GRT-0088] Layer metal9  Track-Pitch = 1.6000  line-2-Via Pitch: 1.6000
+[INFO GRT-0088] Layer metal10 Track-Pitch = 1.6000  line-2-Via Pitch: 1.6000
+[INFO GRT-0003] Macros: 0
+[INFO GRT-0004] Blockages: 0
+[INFO GRT-0019] Found 6 clock nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 25
+
+[INFO GRT-0053] Routing resources analysis:
+          Routing      Original      Derated      Resource
+Layer     Direction    Resources     Resources    Reduction (%)
+---------------------------------------------------------------
+metal1     Horizontal          0             0          0.00%
+metal2     Vertical         1958           935          52.25%
+metal3     Horizontal       2768          1353          51.12%
+metal4     Vertical         1331           935          29.75%
+metal5     Horizontal       1376           975          29.14%
+metal6     Vertical         1396           991          29.01%
+metal7     Horizontal        414           291          29.71%
+metal8     Vertical          484           341          29.55%
+metal9     Horizontal        242           143          40.91%
+metal10    Vertical          242           143          40.91%
+---------------------------------------------------------------
+
+[INFO GRT-0197] Via related to pin nodes: 3142
+[INFO GRT-0198] Via related Steiner nodes: 24
+[INFO GRT-0199] Via filling finished.
+[INFO GRT-0111] Final number of vias: 3804
+[INFO GRT-0112] Final usage 3D: 12930
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Congestion
+---------------------------------------------------------------------------------------
+metal1               0             0            0.00%             0 /  0 /  0
+metal2             935           627           67.06%             0 /  0 /  0
+metal3            1353           681           50.33%             0 /  0 /  0
+metal4             935           156           16.68%             0 /  0 /  0
+metal5             975            47            4.82%             0 /  0 /  0
+metal6             991             7            0.71%             0 /  0 /  0
+metal7             291             0            0.00%             0 /  0 /  0
+metal8             341             0            0.00%             0 /  0 /  0
+metal9             143             0            0.00%             0 /  0 /  0
+metal10            143             0            0.00%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total             6107          1518           24.86%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 7344 um
+[INFO GRT-0014] Routed nets: 734
+[INFO GRT-0303] Global routing runtime = 00:00:00
+[WARNING STA-0450] virtual clock vclk_core_clock can not be propagated.
+estimate_parasitics -global_routing
+Perform buffer insertion and gate resizing...
+repair_design -verbose
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |       756
+       10 |     +0.0% |       0 |       0 |             0 |       746
+       20 |     +0.0% |       0 |       0 |             0 |       736
+       30 |     +0.0% |       0 |       0 |             0 |       726
+       40 |     +0.0% |       0 |       0 |             0 |       716
+       50 |     +0.0% |       0 |       0 |             0 |       706
+       60 |     +0.0% |       0 |       0 |             0 |       696
+       70 |     +0.0% |       0 |       0 |             0 |       686
+       80 |     +0.0% |       0 |       0 |             0 |       676
+       90 |     +0.0% |       0 |       0 |             0 |       666
+      100 |     +0.0% |       0 |       0 |             0 |       656
+      110 |     +0.0% |       0 |       0 |             0 |       646
+      120 |     +0.0% |       0 |       0 |             0 |       636
+      130 |     +0.0% |       0 |       0 |             0 |       626
+      140 |     +0.0% |       0 |       0 |             0 |       616
+      150 |     +0.0% |       0 |       0 |             0 |       606
+      160 |     +0.0% |       0 |       0 |             0 |       596
+      170 |     +0.0% |       0 |       0 |             0 |       586
+      180 |     +0.0% |       0 |       0 |             0 |       576
+      190 |     +0.0% |       0 |       0 |             0 |       566
+      200 |     +0.0% |       0 |       0 |             0 |       556
+      210 |     +0.0% |       0 |       0 |             0 |       546
+      220 |     +0.0% |       0 |       0 |             0 |       536
+      230 |     +0.0% |       0 |       0 |             0 |       526
+      240 |     +0.0% |       0 |       0 |             0 |       516
+      250 |     +0.0% |       0 |       0 |             0 |       506
+      260 |     +0.0% |       0 |       0 |             0 |       496
+      270 |     +0.0% |       0 |       0 |             0 |       486
+      280 |     +0.0% |       0 |       0 |             0 |       476
+      290 |     +0.0% |       0 |       0 |             0 |       466
+      300 |     +0.0% |       0 |       0 |             0 |       456
+      310 |     +0.0% |       0 |       0 |             0 |       446
+      320 |     +0.0% |       0 |       0 |             0 |       436
+      330 |     +0.0% |       0 |       0 |             0 |       426
+      340 |     +0.0% |       0 |       0 |             0 |       416
+      350 |     +0.0% |       0 |       0 |             0 |       406
+      360 |     +0.0% |       0 |       0 |             0 |       396
+      370 |     +0.0% |       0 |       0 |             0 |       386
+      380 |     +0.0% |       0 |       0 |             0 |       376
+      390 |     +0.0% |       0 |       0 |             0 |       366
+      400 |     +0.0% |       0 |       0 |             0 |       356
+      410 |     +0.0% |       0 |       0 |             0 |       346
+      420 |     +0.0% |       0 |       0 |             0 |       336
+      430 |     +0.0% |       0 |       0 |             0 |       326
+      440 |     +0.0% |       0 |       0 |             0 |       316
+      450 |     +0.0% |       0 |       0 |             0 |       306
+      460 |     +0.0% |       0 |       0 |             0 |       296
+      470 |     +0.0% |       0 |       0 |             0 |       286
+      480 |     +0.0% |       0 |       0 |             0 |       276
+      490 |     +0.0% |       0 |       0 |             0 |       266
+      500 |     +0.0% |       0 |       0 |             0 |       256
+      510 |     +0.0% |       0 |       0 |             0 |       246
+      520 |     +0.0% |       0 |       0 |             0 |       236
+      530 |     +0.0% |       0 |       0 |             0 |       226
+      540 |     +0.0% |       0 |       0 |             0 |       216
+      550 |     +0.0% |       0 |       0 |             0 |       206
+      560 |     +0.0% |       0 |       0 |             0 |       196
+      570 |     +0.0% |       0 |       0 |             0 |       186
+      580 |     +0.0% |       0 |       0 |             0 |       176
+      590 |     +0.0% |       0 |       0 |             0 |       166
+      600 |     +0.0% |       0 |       0 |             0 |       156
+      610 |     +0.0% |       0 |       0 |             0 |       146
+      620 |     +0.0% |       0 |       0 |             0 |       136
+      630 |     +0.0% |       0 |       0 |             0 |       126
+[WARNING RSZ-0104] Net _487_ only has one pin. Check if it is intended to be dangling.
+      640 |     +0.0% |       0 |       0 |             0 |       116
+[WARNING RSZ-0104] Net _486_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _485_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _484_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _483_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _482_ only has one pin. Check if it is intended to be dangling.
+      650 |     +0.0% |       0 |       0 |             0 |       106
+[WARNING RSZ-0104] Net _481_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _480_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _479_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _477_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _492_ only has one pin. Check if it is intended to be dangling.
+      660 |     +0.0% |       0 |       0 |             0 |        96
+[WARNING RSZ-0104] Net _491_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _490_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _489_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _488_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _495_ only has one pin. Check if it is intended to be dangling.
+      670 |     +0.0% |       0 |       0 |             0 |        86
+[WARNING RSZ-0104] Net _478_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _494_ only has one pin. Check if it is intended to be dangling.
+[WARNING RSZ-0104] Net _493_ only has one pin. Check if it is intended to be dangling.
+      680 |     +0.0% |       0 |       0 |             0 |        76
+      690 |     +0.0% |       0 |       0 |             0 |        66
+      700 |     +0.0% |       0 |       0 |             0 |        56
+      710 |     +0.0% |       0 |       0 |             0 |        46
+      720 |     +0.0% |       0 |       0 |             0 |        36
+      730 |     +0.0% |       0 |       0 |             0 |        26
+      740 |     +0.0% |       0 |       0 |             0 |        16
+      750 |     +0.0% |       0 |       0 |             0 |         6
+    final |     +0.0% |       0 |       0 |             0 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0504] Runtime: 0.11s
+global_route -start_incremental
+detailed_placement
+[INFO DPL-0006] Core area: 1076.77 um^2
+[INFO DPL-0007] Movable instances area: 908.12 um^2
+[INFO DPL-0008] Fixed instances area within core: 12.24 um^2
+[INFO DPL-0009] Utilization: 85.5%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 731 cells
+[INFO DPL-0500] Runtime: 0.01s
+Detailed Placement Analysis
+---------------------------------
+legalizer            negotiation
+total moves                   0
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL            3837.1 u
+legalized HPWL           3837.1 u
+delta HPWL                    0 %
+
+global_route -end_incremental -congestion_report_file ./reports/nangate45/gcd/base/congestion_post_repair_design.rpt
+Repair setup and hold violations...
+estimate_parasitics -global_routing
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0094] Found 52 endpoints with setup violations.
+[INFO RSZ-0099] Repairing 52 out of 52 (100.00%) violating endpoints...
+   Iter   | Removed | Resized | Inserted | Cloned |  Pin  |   Area   |    WNS   |    TNS     |  Viol  |  Worst
+          | Buffers |  Gates  | Buffers  |  Gates | Swaps |          |          |            | Endpts | Endpoint
+------------------------------------------------------------------------------------------------------------------------------
+       0* |       0 |       0 |        0 |      0 |     0 |    +0.0% |   -0.169 |       -7.4 |     52 | resp_msg[12]
+      10* |       0 |       4 |        3 |      0 |     3 |    +1.4% |   -0.170 |       -7.6 |     52 | dpath.b_reg.out\[8\]$_DFFE_PP_/D
+      20* |       0 |       8 |        5 |      0 |     7 |    +1.9% |   -0.167 |       -7.5 |     52 | dpath.b_reg.out\[8\]$_DFFE_PP_/D
+      21* |       0 |       2 |        0 |      0 |     0 |    +0.1% |   -0.166 |       -7.4 |     52 | dpath.b_reg.out\[15\]$_DFFE_PP_/D
+      28* |       0 |       3 |        0 |      0 |     0 |    +0.5% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+      30* |       0 |       4 |        0 |      0 |     0 |    +0.6% |   -0.172 |       -7.6 |     52 | resp_msg[12]
+      34* |       0 |       3 |        0 |      0 |     0 |    +0.5% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+      40* |       0 |       6 |        1 |      0 |     1 |    +0.8% |   -0.167 |       -7.5 |     52 | dpath.b_reg.out\[15\]$_DFFE_PP_/D
+      50* |       0 |      11 |        3 |      0 |     4 |    +1.2% |   -0.174 |       -7.5 |     52 | resp_msg[12]
+      60* |       0 |      18 |        3 |      0 |     7 |    +1.6% |   -0.168 |       -7.5 |     52 | resp_msg[12]
+      66* |       0 |       3 |        0 |      0 |     0 |    +0.5% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+      70* |       0 |       4 |        2 |      0 |     0 |    +0.9% |   -0.172 |       -7.7 |     52 | resp_msg[12]
+      70* |       0 |       3 |        0 |      0 |     0 |    +0.5% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+      80* |       0 |       9 |        1 |      0 |     2 |    +1.2% |   -0.177 |       -7.8 |     52 | dpath.a_reg.out\[5\]$_DFFE_PP_/D
+      84* |       0 |       3 |        0 |      0 |     0 |    +0.5% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+      90* |       0 |       7 |        1 |      0 |     0 |    +0.9% |   -0.172 |       -7.6 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+      97* |       0 |       3 |        0 |      0 |     0 |    +0.5% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     100* |       0 |       5 |        0 |      0 |     0 |    +0.6% |   -0.168 |       -7.5 |     52 | dpath.a_reg.out\[15\]$_DFFE_PP_/D
+     110* |       0 |      13 |        1 |      0 |     1 |    +1.5% |   -0.172 |       -7.6 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     120* |       0 |      19 |        6 |      0 |     1 |    +2.4% |   -0.175 |       -7.7 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     130* |       0 |      24 |        8 |      0 |     4 |    +2.9% |   -0.175 |       -7.7 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     137* |       0 |       8 |        0 |      0 |     0 |    +0.9% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     140* |       0 |       9 |        0 |      0 |     1 |    +1.0% |   -0.170 |       -7.4 |     52 | resp_msg[12]
+     150* |       0 |      19 |        0 |      0 |     1 |    +1.8% |   -0.171 |       -7.5 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     160* |       0 |      26 |        0 |      0 |     4 |    +2.3% |   -0.177 |       -7.7 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     170* |       0 |      34 |        1 |      0 |     5 |    +3.0% |   -0.176 |       -7.7 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     179* |       0 |       8 |        0 |      0 |     0 |    +0.9% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     180* |       0 |       8 |        0 |      0 |     0 |    +0.9% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     190* |       0 |      15 |        2 |      0 |     1 |    +1.9% |   -0.172 |       -7.7 |     52 | dpath.a_reg.out\[5\]$_DFFE_PP_/D
+     193* |       0 |       8 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     200* |       0 |      12 |        2 |      0 |     1 |    +1.4% |   -0.172 |       -7.7 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     206* |       0 |       8 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     210* |       0 |       9 |        3 |      0 |     0 |    +1.4% |   -0.172 |       -7.7 |     52 | resp_msg[12]
+     210* |       0 |       8 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     220* |       0 |      16 |        2 |      0 |     0 |    +2.0% |   -0.172 |       -7.7 |     52 | dpath.a_reg.out\[5\]$_DFFE_PP_/D
+     222* |       0 |       8 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     230* |       0 |      13 |        2 |      0 |     1 |    +1.6% |   -0.172 |       -7.7 |     52 | dpath.a_reg.out\[5\]$_DFFE_PP_/D
+     233* |       0 |       8 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     237* |       0 |       8 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     240* |       0 |      10 |        1 |      0 |     0 |    +1.3% |   -0.176 |       -7.7 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     250* |       0 |      17 |        3 |      0 |     1 |    +2.1% |   -0.176 |       -7.7 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     250* |       0 |       8 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     256* |       0 |       8 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     260* |       0 |      11 |        1 |      0 |     0 |    +1.3% |   -0.176 |       -7.7 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     270* |       0 |      17 |        3 |      0 |     2 |    +2.0% |   -0.176 |       -7.7 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     275* |       0 |       9 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     280* |       0 |      12 |        1 |      0 |     1 |    +1.3% |   -0.174 |       -7.7 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     288* |       0 |       9 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     290* |       0 |      10 |        1 |      0 |     0 |    +1.2% |   -0.172 |       -7.6 |     52 | resp_msg[12]
+     294* |       0 |       9 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     300* |       0 |      13 |        2 |      0 |     0 |    +1.6% |   -0.176 |       -7.7 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     310* |       0 |      17 |        3 |      0 |     5 |    +2.1% |   -0.177 |       -7.8 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     320* |       0 |      25 |        3 |      0 |     7 |    +2.7% |   -0.177 |       -7.8 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     322* |       0 |       9 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     330* |       0 |      13 |        2 |      0 |     2 |    +1.5% |   -0.174 |       -7.7 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     339* |       0 |       9 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     340* |       0 |       9 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     350* |       0 |      16 |        3 |      0 |     1 |    +1.9% |   -0.176 |       -7.7 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     353* |       0 |       9 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     360* |       0 |      14 |        2 |      0 |     0 |    +1.8% |   -0.172 |       -7.7 |     52 | resp_msg[12]
+     362* |       0 |       9 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     370* |       0 |      16 |        1 |      0 |     0 |    +1.6% |   -0.172 |       -7.6 |     52 | resp_msg[12]
+     380* |       0 |      25 |        1 |      0 |     1 |    +2.2% |   -0.172 |       -7.6 |     52 | resp_msg[12]
+     390* |       0 |      35 |        1 |      0 |     1 |    +3.0% |   -0.172 |       -7.6 |     52 | resp_msg[12]
+     400* |       0 |      43 |        1 |      0 |     3 |    +3.8% |   -0.172 |       -7.6 |     52 | resp_msg[12]
+     403* |       0 |       9 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     410* |       0 |      13 |        3 |      0 |     0 |    +1.8% |   -0.172 |       -7.7 |     52 | resp_msg[12]
+     410* |       0 |       9 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     420* |       0 |      15 |        2 |      0 |     2 |    +1.7% |   -0.170 |       -7.5 |     52 | resp_msg[14]
+     429* |       0 |       9 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     430* |       0 |       9 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     440* |       0 |      15 |        3 |      0 |     2 |    +1.8% |   -0.178 |       -7.8 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     450* |       0 |      23 |        4 |      0 |     3 |    +2.9% |   -0.177 |       -7.8 |     52 | dpath.a_reg.out\[7\]$_DFFE_PP_/D
+     450* |       0 |       9 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     455* |       0 |       9 |        1 |      0 |     0 |    +1.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     460* |       0 |      12 |        2 |      0 |     0 |    +1.4% |   -0.168 |       -7.4 |     52 | resp_msg[12]
+     470* |       0 |      21 |        2 |      0 |     1 |    +2.0% |   -0.172 |       -7.5 |     52 | dpath.a_reg.out\[15\]$_DFFE_PP_/D
+     479* |       0 |      10 |        2 |      0 |     0 |    +1.2% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     480* |       0 |      10 |        2 |      0 |     0 |    +1.2% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     490* |       0 |      19 |        2 |      0 |     1 |    +1.9% |   -0.172 |       -7.6 |     52 | resp_msg[12]
+     500* |       0 |      27 |        3 |      0 |     2 |    +2.7% |   -0.177 |       -7.8 |     52 | resp_msg[12]
+     510* |       0 |      37 |        3 |      0 |     2 |    +3.4% |   -0.177 |       -7.8 |     52 | resp_msg[12]
+     520* |       0 |      47 |        3 |      0 |     2 |    +4.0% |   -0.177 |       -7.8 |     52 | resp_msg[12]
+     530* |       0 |      52 |        3 |      0 |     7 |    +4.6% |   -0.177 |       -7.8 |     52 | resp_msg[12]
+     530* |       0 |      10 |        2 |      0 |     0 |    +1.2% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     540* |       0 |      17 |        3 |      0 |     1 |    +2.0% |   -0.173 |       -7.7 |     52 | dpath.b_reg.out\[15\]$_DFFE_PP_/D
+     540* |       0 |      10 |        2 |      0 |     0 |    +1.2% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     544* |       0 |      10 |        2 |      0 |     0 |    +1.2% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     550* |       0 |      15 |        2 |      0 |     0 |    +1.7% |   -0.172 |       -7.6 |     52 | resp_msg[12]
+     560* |       0 |      24 |        2 |      0 |     1 |    +2.2% |   -0.172 |       -7.7 |     52 | resp_msg[12]
+     570* |       0 |      33 |        2 |      0 |     2 |    +3.1% |   -0.177 |       -7.8 |     52 | resp_msg[12]
+     580* |       0 |      42 |        2 |      0 |     3 |    +3.8% |   -0.177 |       -7.8 |     52 | resp_msg[12]
+     582* |       0 |      10 |        2 |      0 |     0 |    +1.2% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     590* |       0 |      16 |        2 |      0 |     1 |    +1.9% |   -0.173 |       -7.7 |     52 | dpath.b_reg.out\[15\]$_DFFE_PP_/D
+     591* |       0 |      10 |        2 |      0 |     0 |    +1.2% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     599* |       0 |      10 |        2 |      0 |     0 |    +1.2% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     600* |       0 |      10 |        2 |      0 |     0 |    +1.2% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     607* |       0 |      10 |        2 |      0 |     0 |    +1.2% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     610* |       0 |      11 |        3 |      0 |     0 |    +1.3% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     620* |       2 |      15 |        6 |      0 |     1 |    +1.6% |   -0.166 |       -7.5 |     52 | resp_msg[12]
+     621* |       2 |      12 |        5 |      0 |     1 |    +1.3% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     627* |       2 |      12 |        5 |      0 |     1 |    +1.3% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     630* |       2 |      13 |        6 |      0 |     1 |    +1.6% |   -0.172 |       -7.7 |     52 | resp_msg[12]
+     634* |       2 |      12 |        5 |      0 |     1 |    +1.3% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     640* |       2 |      16 |        6 |      0 |     1 |    +2.0% |   -0.172 |       -7.7 |     52 | resp_msg[12]
+     641* |       2 |      12 |        5 |      0 |     1 |    +1.3% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     647* |       2 |      12 |        5 |      0 |     1 |    +1.3% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     650* |       2 |      13 |        6 |      0 |     1 |    +1.6% |   -0.172 |       -7.7 |     52 | resp_msg[12]
+     653* |       2 |      12 |        5 |      0 |     1 |    +1.3% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     660* |       2 |      17 |        5 |      0 |     2 |    +1.8% |   -0.172 |       -7.7 |     52 | resp_msg[12]
+     670* |       2 |      24 |        5 |      0 |     5 |    +2.2% |   -0.172 |       -7.7 |     52 | resp_msg[12]
+     680* |       2 |      30 |        6 |      0 |     8 |    +2.7% |   -0.177 |       -7.8 |     52 | resp_msg[12]
+     683* |       2 |      12 |        5 |      0 |     1 |    +1.3% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     690* |       2 |      16 |        5 |      0 |     3 |    +1.7% |   -0.177 |       -7.8 |     52 | resp_msg[12]
+     700* |       2 |      22 |        8 |      0 |     4 |    +2.5% |   -0.179 |       -7.9 |     52 | resp_msg[12]
+     701* |       2 |      12 |        5 |      0 |     1 |    +1.3% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     710* |       2 |      19 |        5 |      0 |     2 |    +1.9% |   -0.168 |       -7.5 |     52 | dpath.b_reg.out\[15\]$_DFFE_PP_/D
+     713* |       2 |      17 |        5 |      0 |     2 |    +1.8% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     720* |       2 |      20 |        7 |      0 |     3 |    +2.1% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     723* |       2 |      17 |        6 |      0 |     3 |    +1.8% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     730* |       2 |      20 |        8 |      0 |     4 |    +2.1% |   -0.166 |       -7.5 |     52 | resp_msg[12]
+     740* |       3 |      27 |       10 |      0 |     4 |    +2.7% |   -0.166 |       -7.5 |     52 | resp_msg[12]
+     740* |       2 |      18 |        6 |      0 |     3 |    +1.9% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     749* |       2 |      18 |        6 |      0 |     3 |    +1.9% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     750* |       2 |      18 |        6 |      0 |     3 |    +1.9% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     754* |       2 |      19 |        6 |      0 |     4 |    +2.0% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     760* |       2 |      22 |        7 |      0 |     5 |    +2.4% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     760* |       2 |      21 |        6 |      0 |     5 |    +2.2% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     765* |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     765* |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     52 | resp_msg[12]
+     766+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     767+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     768+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     769+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     770+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     770+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     771+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     772+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     773+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     774+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     775+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     776+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     777+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     778+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     779+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     780+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     780+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     781+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     782+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     783+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     784+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     785+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     786+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     787+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     788+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     789+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     790+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     790+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     791+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     792+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     793+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     794+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     795+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     796+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     797+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     798+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     799+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     800+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     800+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     801+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     802+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     803+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     804+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     805+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     806+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     807+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     808+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     809+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     810+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     810+ |       3 |      23 |        7 |      0 |     5 |    +2.3% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     812+ |       3 |      24 |        7 |      0 |     5 |    +2.4% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     813+ |       3 |      24 |        7 |      0 |     5 |    +2.4% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     815+ |       3 |      25 |        7 |      0 |     5 |    +2.5% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     817+ |       3 |      26 |        7 |      0 |     5 |    +2.5% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     818+ |       3 |      26 |        7 |      0 |     5 |    +2.5% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+     819+ |       3 |      26 |        7 |      0 |     5 |    +2.5% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+    final |       3 |      26 |        7 |      0 |     5 |    +2.5% |   -0.166 |       -7.4 |     51 | resp_msg[12]
+------------------------------------------------------------------------------------------------------------------------------
+[INFO RSZ-0059] Removed 3 buffers.
+[INFO RSZ-0040] Inserted 7 buffers.
+[INFO RSZ-0051] Resized 26 instances: 26 up, 0 up match, 0 down, 0 VT
+[INFO RSZ-0043] Swapped pins on 5 instances.
+[WARNING RSZ-0062] Unable to repair all setup violations.
+[INFO RSZ-0505] Runtime: 30.79s
+[INFO RSZ-0033] No hold violations found.
+[INFO RSZ-0506] Runtime: 0.00s
+Took 31 seconds: repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+global_route -start_incremental
+detailed_placement
+[INFO DPL-0006] Core area: 1076.77 um^2
+[INFO DPL-0007] Movable instances area: 931.27 um^2
+[INFO DPL-0008] Fixed instances area within core: 12.24 um^2
+[INFO DPL-0009] Utilization: 87.6%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 735 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |        162 |        42 |       120
+        1 |        106 |        30 |        76
+        2 |        104 |        22 |        82
+        3 |        114 |        18 |        96
+        4 |        106 |        16 |        90
+        5 |        111 |        17 |        94
+        6 |         96 |        16 |        80
+        7 |        102 |        14 |        88
+        8 |         67 |        13 |        54
+        9 |         65 |        13 |        52
+       10 |         66 |        14 |        52
+       18 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 18.
+[INFO DPL-0500] Runtime: 0.03s
+Detailed Placement Analysis
+---------------------------------
+legalizer            negotiation
+total moves                 933
+total displacement        258.3 u
+average displacement        0.4 u
+max displacement            9.4 u
+original HPWL            3851.4 u
+legalized HPWL           4136.4 u
+delta HPWL                    7 %
+
+check_placement -verbose
+global_route -end_incremental -congestion_report_file ./reports/nangate45/gcd/base/congestion_post_repair_timing.rpt
+estimate_parasitics -global_routing
+global_route -start_incremental
+global_route -end_incremental -congestion_report_file ./reports/nangate45/gcd/base/congestion_post_recover_power.rpt
+Repair antennas...
+[WARNING GRT-0246] No diode with LEF class CORE ANTENNACELL found.
+[INFO ANT-0002] Found 0 net violations.
+[INFO ANT-0001] Found 0 pin violations.
+Estimate parasitics...
+estimate_parasitics -global_routing
+Report metrics stage 5, global route...
+
+==========================================================================
+global route report_design_area
+--------------------------------------------------------------------------
+Design area 944 um^2 88% utilization.
+[INFO FLW-0007] clock core_clock period 0.250000
+[WARNING FLW-0010] more than one clock found. Skipping sdc update.
+[INFO FLW-0011] Path endpoint path count 75
+write_db ./results/nangate45/gcd/base/5_1_grt.odb
+write_sdc -no_timestamp ./results/nangate45/gcd/base/5_1_grt.sdc
+Elapsed time: 0:34.67[h:]min:sec. CPU time: user 53.46 sys 1.09 (157%). Peak memory: 345324KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+5_1_grt                   .odb           34            337 1f67d49d0e9f3d13c111
+5_1_grt                   .sdc                             d53a5cbf6c02baa522ac

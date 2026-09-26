@@ -1,0 +1,16 @@
+OpenROAD unknown 
+Features included (+) or not (-): -GPU +GUI -Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 10 thread(s).
+read_liberty /OpenROAD-flow-scripts/flow/platforms/nangate45/lib/NangateOpenCellLibrary_typical.lib
+read_db ./results/nangate45/gcd/base/2_3_floorplan_tapcell.odb
+read_sdc ./results/nangate45/gcd/base/2_1_floorplan.sdc
+source /OpenROAD-flow-scripts/flow/platforms/nangate45/setRC.tcl
+[INFO PDN-0001] Inserting grid: grid
+[INFO PDN-0500] Runtime: 0.04s
+Design area 710 um^2 66% utilization.
+write_db ./results/nangate45/gcd/base/2_4_floorplan_pdn.odb
+Elapsed time: 0:00.76[h:]min:sec. CPU time: user 0.74 sys 0.02 (99%). Peak memory: 131100KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_4_floorplan_pdn         .odb            0            128 461dfd1724bb0adc75c0
