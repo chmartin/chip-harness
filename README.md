@@ -95,6 +95,7 @@ mkdir -p harness/eda_assets && docker run --rm --platform linux/amd64 openroad/o
 export CLOCK_MHZ=1500                                  # clock target (default 1000); not checkpointed, so set it on resume too
 python -m chipharness.seed                             # plateau policy + seed harness h1
 python -m chipharness.smoke                            # baseline trial t-h1-00 (~5 min)
+python -m chipharness.preflight                        # read-only checks: Atlas state, keys, Docker, dashboard
 python -m chipharness.graph --iterations 10 --thread run2           # both loops
 python -m chipharness.graph --thread run2 --resume                  # continue after a kill (Ctrl-C)
 ```
@@ -106,7 +107,7 @@ On Apple Silicon, ORFS runs under Rosetta with `LEC_CHECK=0`: about 5 min per fu
 ## Layout
 | Path | What |
 |---|---|
-| `harness/src/chipharness/` | `graph.py` (loops), `agents.py` (Strands agents), `pipeline.py` (one trial end to end), `eda.py` (testbench, Tier 1, Tier 2), `parser.py` (ORFS reports), `reports.py` (agent context), `db.py`, `seed.py`, `smoke.py` |
+| `harness/src/chipharness/` | `graph.py` (loops), `agents.py` (Strands agents), `pipeline.py` (one trial end to end), `eda.py` (testbench, Tier 1, Tier 2), `parser.py` (ORFS reports), `reports.py` (agent context), `db.py`, `seed.py`, `smoke.py`, `preflight.py` (read-only pre-run checks) |
 | `harness/designs/mac_array/` | Baseline RTL and the testbench gate |
 | `harness/tests/` | Parser tests on saved ORFS runs |
 | `contract/` | Interface contract (data shapes) and mock JSON |
