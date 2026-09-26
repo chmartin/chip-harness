@@ -21,3 +21,4 @@ out/
 # Harness run output
 runs/
 harness/eda_assets/*.lib
+dashboard/.env.local

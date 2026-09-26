@@ -60,7 +60,7 @@ def propose(s: S) -> S:
     def one(slot_fam):
         slot, fam = slot_fam
         tid = pipeline.trial_id(v["_id"], s["iteration"], slot)
-        if (t := db.get_trial(tid)) and t["status"] in ("done", "error"):
+        if (t := db.get_trial(tid)) and t["status"] == "done":
             return {"trial_id": tid, "cached": True}
         p = agents.propose(v, parent, fam, slot)
         return {"trial_id": tid, "fix_family": fam, **p}
@@ -133,7 +133,8 @@ def _lesson(d: dict, v: dict, parent_fmax: float | None) -> None:
 def check_plateau(s: S) -> S:
     v = db.get_version(s["version_id"])
     pol = db.plateau_policy()
-    ts = db.version_trials(v["_id"])
+    ts = [t for t in db.version_trials(v["_id"])
+          if t.get("iteration", 0) > 0 and t.get("design")]  # skip baseline + LLM/infra errors
     reason = None
     if len(ts) >= pol["min_trials"]:
         k = pol["stuck_rejecting"]["consecutive_rejects"]
@@ -224,6 +225,13 @@ def main() -> None:
     ap.add_argument("--thread", default="main")
     ap.add_argument("--resume", action="store_true")
     a = ap.parse_args()
+    import os
+    if not os.environ.get("OPENROUTER_API_KEY"):
+        raise SystemExit("OPENROUTER_API_KEY is empty - set it in .env (repo root)")
+    # drop trials that failed before producing a design, so they are retried
+    n = db.trials().delete_many({"status": "error", "design": None}).deleted_count
+    if n:
+        log(f"removed {n} errored trials (no design) for retry")
     saver = MongoDBSaver(db.client(), db_name=config.MONGODB_DB)
     graph = build(saver)
     cfg = {"configurable": {"thread_id": a.thread}, "recursion_limit": 1000}
