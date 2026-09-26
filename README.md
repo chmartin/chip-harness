@@ -7,20 +7,34 @@ A harness that designs hardware and rewrites itself.
 
 Built for The Harness Engineering & Model Wrangling Hackathon (MongoDB NYC, Sep 26 2026), **Problem Statement 1: Recursive Harnessing**. Inspired by [Meta harness makes 10 times better Kimi K3 chip](https://www.luoluo.ai/blog/kimi-k3).
 
-## Current state (Sep 26, ~1:30 PM)
-- **Run 1 (1 GHz target): done.** h1 → h2 gave **+46%** fmax (details below). Its data is archived in Atlas as the `run1_*` collections, and its log is in [`logs/run1_h1_to_h5.txt`](logs/run1_h1_to_h5.txt).
-- **Run 2 (1.5 GHz target): in progress.** This is a clean re-run from the seed harness h1, and the demo video records it.
-  - **Why:** at 1 GHz every good design met timing, and OpenROAD stops optimizing once a design meets the target.
-  - **Tracing:** run 2 is traced end to end:
-    - LangGraph nodes and the Strands agents' model and tool calls in LangSmith
-    - per-call cost in OpenRouter
-    - all state in Atlas
-    - the live chart on the dashboard
-  - **Results:** added here when the run finishes; its log will be `logs/run2_1500.log`.
-- **Not built (cut for time):**
-  - vector search over lessons (lessons are retrieved with a plain query instead)
-  - Atlas as a job queue for extra worker machines
-  - EC2 workers
+## Why it matters
+- **The problem.** Timing closure, getting a chip to hit its clock speed, is a slow loop that depends on experts: edit the RTL, re-verify it, synthesize, place and route, read the timing reports, repeat. The real answer only arrives at the end of each expensive pass.
+- **The gap.** AI agents can take on that loop, but only as well as the harness around them: what they see, which tools they have, what they remember. Today humans tune that harness by hand.
+- **What this does.** The harness tunes itself, against a verifier that can't be gamed. A change survives only if routed silicon says it helped, and every change is diffed, explained and stored in MongoDB Atlas. The result is more reliable agents with no human prompt-engineering, less wasted compute, and a full audit trail.
+- **Where else it applies.** Any engineering task with a hard check: compilers, GPU kernels, query plans.
+
+## Results (Sep 26)
+### What harness evolution got us (run 2, 1.5 GHz target, fully traced)
+| | Seed harness h1 | Evolved harnesses h2–h9 |
+|---|---|---|
+| Agent designs passing verification | 1 of 8 (13%) | **32 of 32 (100%)** |
+| Testbench failures | 7 in a row | **0** |
+| Agent time per proposal round | ~10 s | ~1½ min median (agents now test their drafts before submitting) |
+
+- **Self-diagnosis:** the plateau rule flagged h1 as stuck 4 min 19 s into the run. The evolution agent read the failures from Atlas and wrote h2 in 17 s.
+- **8 rewrites, 16–24 s each.** All 8 gave the design agents the `tier1_check` self-test tool and the critical-path report.
+- **Keep rule:** 0 of 8 rewrites were kept. None beat its parent's best fmax by the 1% bar: h1 found a 1529.8 MHz design in its first iteration, and the best evolved design was 1545.4 MHz (h4, +0.9%). The harness refused to count noise as progress.
+- **Compute:** 40 trials in 96 min real time on one laptop (including one kill and resume from the Atlas checkpoints). Place-and-route used 4.6 CPU-hours over 33 runs (about 8.4 CPU-min each). The agents used about 13 min, and model calls cost about $13 on OpenRouter (the whole day, including run 1's $8.23, came to $21.10, all Claude Sonnet 4.5). The testbench gate rejected 7 broken designs in seconds, skipping about 1 CPU-hour of routing.
+- **Known limitation:** the evolution agent always branched from h1 and re-derived much the same fix. The next step is to put the retired versions' lessons into its context.
+- **Log:** [`logs/run2_1500.log`](logs/run2_1500.log). Every trial, harness version, rationale and diff is on the [dashboard](https://chip-harness.vercel.app/).
+
+### Run 1 (1 GHz target): the rewrite made the chip 46.5% faster
+The seed harness failed the testbench 4 of 4 times. Its rewrite h2 was **kept** and raised fmax from 909.5 to 1332.2 MHz, measured after full place-and-route with 0 DRC violations. Details below; data archived in Atlas as the `run1_*` collections, log in [`logs/run1_h1_to_h5.txt`](logs/run1_h1_to_h5.txt).
+
+### Not built (cut for time)
+- vector search over lessons (lessons are retrieved with a plain query instead)
+- Atlas as a job queue for extra worker machines
+- EC2 workers
 
 ## What happened in run 1 (1 GHz target)
 - **h1** is the deliberately weak seed harness: summary slack only, no tools, no lessons. All 4 of its attempts at pipelining broke the design (e.g. registering the product without delaying the enable), and the testbench rejected every one. That triggered the plateau rule `stuck_rejecting`.
@@ -115,7 +129,7 @@ On Apple Silicon, ORFS runs under Rosetta with `LEC_CHECK=0`: about 5 min per fu
 | `eda/` | Toolchain setup and feasibility test |
 
 ## Thanks
-- **[OpenRouter](https://openrouter.ai)**: every design and evolution agent call ran through OpenRouter, on hackathon credits plus a top-up. Thank you for the credits and the one-key access to models.
+- **[OpenRouter](https://openrouter.ai)**: thank you for the hackathon credit boost. Every design and evolution agent call ran on it, with one-key access to models.
 - **MongoDB**, for the Atlas Hackathon Sandbox, and **Cerebral Valley**, for hosting.
 - **AWS** (Strands Agents), **LangChain** (LangGraph) and **Vercel**, for the tools this runs on.
 - The **OpenROAD**, **Yosys** and **OSS CAD Suite** projects, for open-source chip design.
