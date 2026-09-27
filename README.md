@@ -110,7 +110,7 @@ export CLOCK_MHZ=1500                                  # clock target (default 1
 python -m chipharness.seed                             # plateau policy + seed harness h1
 python -m chipharness.smoke                            # baseline trial t-h1-00 (~5 min)
 python -m chipharness.preflight                        # read-only checks: Atlas state, keys, Docker, dashboard
-python -m chipharness.graph --iterations 10 --thread run2           # both loops
+python -m chipharness.graph --thread run2       # both loops; the harness decides when to stop
 python -m chipharness.graph --thread run2 --resume                  # continue after a kill (Ctrl-C)
 ```
 Run from the repo root. `python -m chipharness.seed --reset` wipes trials, versions and lessons, so rename them first if you want to keep a run.

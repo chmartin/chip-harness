@@ -18,6 +18,9 @@ PLATEAU_POLICY = {
     "stuck_rejecting": {"consecutive_rejects": 4},
     "budget_cap": {"max_trials": 8},
     "keep_min_gain_pct": 1.0,
+    # the harness decides when to stop evolving (see graph.STOP_DEFAULTS)
+    "stop": {"max_consecutive_retired": 3, "novelty_max_similarity": 0.8, "novelty_attempts": 3,
+             "max_versions": 6, "max_iterations": 8},
 }
 
 DESIGN_MODEL = os.environ.get("DESIGN_MODEL", "anthropic/claude-sonnet-4.5")

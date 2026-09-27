@@ -174,13 +174,70 @@ You may change:
 - guardrails: may add, must keep "testbench must pass".
 You may NOT change the scorer, the testbench, the plateau policy or the models.
 
-Use the trial_history tool (it queries MongoDB Atlas). Reply with:
+Use the trial_history tool (it queries MongoDB Atlas; pass any version id, including earlier
+attempts listed under "Already tried"). Earlier attempts from the same base were RETIRED because they did
+not beat it. Do NOT resubmit the same change set: a proposal whose structural changes (tools, reports,
+fix families, lessons, tier2 policy) nearly match an earlier attempt is rejected automatically, and
+rewording the prompt alone does not count as a new idea. Learn from why they failed and try a genuinely
+different direction.
+
+Reply with:
 ```json
-{{"rationale": "<2-4 sentences: what was wrong and what you changed>", "config": {{<full new config>}}}}
+{{"rationale": "<2-4 sentences: what was wrong, what earlier attempts taught you, what you changed>", "config": {{<full new config>}}}}
+```
+If you judge that no change within the allowed search space is likely to beat the base harness, reply
+instead with:
+```json
+{{"stop": true, "rationale": "<why further evolution is not worth it>"}}
 ```"""
 
 
-def evolve(version: dict, reason: str) -> dict:
+def _bucket_regression(r) -> str:
+    if r is None:
+        return "off"
+    return "tight" if r <= 0.25 else "medium" if r <= 1.0 else "loose"
+
+
+def change_signature(new: dict, base: dict) -> list[str]:
+    """Structural changes of a harness config relative to its base, as comparable tokens.
+
+    Prompt wording is ignored on purpose: rephrasing the same structural change is not a new idea.
+    """
+    sig = set()
+    for key, tag in (("tools", "tool"), ("reports_read", "report")):
+        a, b = set(base.get(key) or []), set(new.get(key) or [])
+        sig |= {f"+{tag}:{x}" for x in b - a} | {f"-{tag}:{x}" for x in a - b}
+    fa = {f["name"]: f["weight"] for f in base.get("fix_families", [])}
+    fb = {f["name"]: f["weight"] for f in new.get("fix_families", [])}
+    sig |= {f"+fam:{x}" for x in fb.keys() - fa.keys()} | {f"-fam:{x}" for x in fa.keys() - fb.keys()}
+    if fb and fb != fa:
+        sig.add(f"top_fam:{max(fb, key=fb.get)}")
+    la, lb = (base.get("context") or {}).get("lessons", 0), (new.get("context") or {}).get("lessons", 0)
+    if la != lb:
+        sig.add(f"lessons:{'off' if not lb else 'few' if lb <= 3 else 'many'}")
+    ra = (base.get("tier2_policy") or {}).get("max_tier1_regression_ns")
+    rb = (new.get("tier2_policy") or {}).get("max_tier1_regression_ns")
+    if _bucket_regression(ra) != _bucket_regression(rb):
+        sig.add(f"tier2:{_bucket_regression(rb)}")
+    if set(new.get("guardrails") or []) != set(base.get("guardrails") or []):
+        sig.add("guardrails")
+    if not (sig - {"guardrails"}) and new.get("diagnosis_prompt") != base.get("diagnosis_prompt"):
+        sig.add("prompt_only")
+    return sorted(sig)
+
+
+def similarity(a: list[str], b: list[str]) -> float:
+    a, b = set(a), set(b)
+    return 1.0 if not a and not b else len(a & b) / len(a | b)
+
+
+def evolve(version: dict, reason: str, tried: list[dict] | None = None, feedback: str | None = None) -> dict:
+    """Propose the next harness from `version`.
+
+    tried: earlier attempts from this same base, each {id, verdict, gain_pct, signature, rationale}.
+    feedback: why the previous proposal in this evolve step was rejected (duplicate / no change).
+    Returns {rationale, config, signature, llm} or {stop: True, rationale, llm}.
+    """
     cfg = version["config"]
     model_id = cfg["models"]["evolution"]
 
@@ -195,15 +252,25 @@ def evolve(version: dict, reason: str) -> dict:
                         f"goal={t.get('goal', '')[:140]}")
         return "\n".join(rows) or "(none)"
 
-    agent = Agent(model=_model(model_id, temperature=0.4), system_prompt=EVOLVE_SYSTEM,
+    agent = Agent(model=_model(model_id, temperature=0.7 if feedback else 0.4), system_prompt=EVOLVE_SYSTEM,
                   tools=[trial_history], callback_handler=None, name=f"evolve-{version['_id']}",
                   trace_attributes={"harness_version": version["_id"], "plateau_reason": reason})
+    hist = "\n".join(
+        f"- {t['id']}: {t['verdict']} ({t['gain_pct']:+.1f}% vs base) changes={t['signature']} "
+        f"rationale: {t['rationale'][:240]}" for t in (tried or [])) or "(none - this is the first evolution from this base)"
     prompt = (f"Plateau reason: {reason}. Harness version {version['_id']} stats: {json.dumps(version.get('stats'))}\n"
-              f"Current config:\n```json\n{json.dumps(cfg, indent=2)}\n```")
+              f"Current config:\n```json\n{json.dumps(cfg, indent=2)}\n```\n\n"
+              f"Already tried from {version['_id']} (do not repeat these change sets):\n{hist}")
+    if feedback:
+        prompt += f"\n\nYour previous proposal was rejected: {feedback}"
     result = agent(prompt)
     out = _json_block(str(result))
-    return {"rationale": out.get("rationale", ""), "config": sanitize_config(out.get("config") or {}, cfg),
-            "llm": _usage(result, model_id)}
+    llm = _usage(result, model_id)
+    if out.get("stop") is True:
+        return {"stop": True, "rationale": out.get("rationale", ""), "llm": llm}
+    new_cfg = sanitize_config(out.get("config") or {}, cfg)
+    return {"rationale": out.get("rationale", ""), "config": new_cfg,
+            "signature": change_signature(new_cfg, cfg), "llm": llm}
 
 
 def sanitize_config(new: dict, old: dict) -> dict:
